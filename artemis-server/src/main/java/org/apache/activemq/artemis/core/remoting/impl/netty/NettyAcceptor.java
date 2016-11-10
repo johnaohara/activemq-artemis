@@ -86,7 +86,10 @@ public class NettyAcceptor implements Acceptor {
 
    static {
       // Disable resource leak detection for performance reasons by default
-      ResourceLeakDetector.setLevel(ResourceLeakDetector.Level.DISABLED);
+      // Only disable if it was not specified on the command line (meaning the user wants it on)
+      if(System.getProperty("io.netty.leakDetectionLevel")==null && System.getProperty("io.netty.leakDetection.level")==null) {
+      	ResourceLeakDetector.setLevel(ResourceLeakDetector.Level.DISABLED);
+      }
    }
 
    //just for debug

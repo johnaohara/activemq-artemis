@@ -379,7 +379,7 @@ public class OpenWireConnection implements RemotingConnection, CommandVisitor, S
    }
 
    @Override
-   public ActiveMQBuffer createTransportBuffer(int size) {
+   public ActiveMQBuffer createTransportBuffer(int size, boolean pooled) {
       return ActiveMQBuffers.dynamicBuffer(size);
    }
 

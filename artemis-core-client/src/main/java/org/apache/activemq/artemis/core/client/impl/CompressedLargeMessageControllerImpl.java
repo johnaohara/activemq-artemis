@@ -614,6 +614,11 @@ final class CompressedLargeMessageControllerImpl implements LargeMessageControll
 
    // Inner classes -------------------------------------------------
 
+   @Override
+   public boolean isPooled() {
+      return false;
+   }
+
    public ByteBuf byteBuf() {
       return null;
    }

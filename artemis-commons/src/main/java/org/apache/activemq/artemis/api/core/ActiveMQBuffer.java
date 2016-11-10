@@ -32,6 +32,8 @@ import io.netty.buffer.ByteBuf;
  */
 public interface ActiveMQBuffer extends DataInput {
 
+   boolean isPooled();
+
    /**
     * Returns the underlying Netty's ByteBuf
     *

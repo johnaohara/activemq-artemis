@@ -150,7 +150,7 @@ public class NettyConnection implements Connection {
       listener.connectionDestroyed(getID());
    }
 
-   public ActiveMQBuffer createTransportBuffer(final int size) {
+   public ActiveMQBuffer createTransportBuffer(final int size, final boolean pooled) {
       return new ChannelBufferWrapper(PartialPooledByteBufAllocator.INSTANCE.directBuffer(size), true);
    }
 
@@ -170,7 +170,7 @@ public class NettyConnection implements Connection {
             if (batchBuffer != null && batchBuffer.readable()) {
                channel.writeAndFlush(batchBuffer.byteBuf());
 
-               batchBuffer = createTransportBuffer(BATCHING_BUFFER_SIZE);
+               batchBuffer = createTransportBuffer(BATCHING_BUFFER_SIZE, false);
             }
          }
          finally {

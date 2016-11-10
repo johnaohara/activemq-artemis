@@ -957,6 +957,10 @@ public final class ClientConsumerImpl implements ClientConsumerInternal {
             }
             else {
                session.expire(this, message);
+
+//               if(message.getBodyBuffer().byteBuf().is)
+               //clean up buffer for JMS message
+               message.getBodyBuffer().byteBuf().release();
             }
 
             // If slow consumer, we need to send 1 credit to make sure we get another message

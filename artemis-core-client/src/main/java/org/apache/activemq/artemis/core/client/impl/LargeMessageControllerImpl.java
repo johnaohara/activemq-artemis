@@ -1198,6 +1198,11 @@ public class LargeMessageControllerImpl implements LargeMessageController {
       return ByteUtil.readLine(this);
    }
 
+   @Override
+   public boolean isPooled() {
+      return false;
+   }
+
    public ByteBuf byteBuf() {
       return null;
    }
