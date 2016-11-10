@@ -915,7 +915,7 @@ public abstract class MessageImpl implements MessageInternal {
    }
 
    public void createBody(final int initialMessageBufferSize,final boolean wantPooled) {
-      buffer = wantPooled ? ActiveMQBuffers.pooledDynamicBuffer(initialMessageBufferSize) : ActiveMQBuffers.dynamicBuffer(initialMessageBufferSize);
+      buffer = wantPooled ? ActiveMQBuffers.andyDynamicBuffer(initialMessageBufferSize) : ActiveMQBuffers.dynamicBuffer(initialMessageBufferSize);
 
       // There's a bug in netty which means a dynamic buffer won't resize until you write a byte
       buffer.writeByte((byte) 0);

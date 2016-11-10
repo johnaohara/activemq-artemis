@@ -39,7 +39,7 @@ public final class ActiveMQBuffers {
       return new ChannelBufferWrapper(Unpooled.buffer(size));
    }
 
-   public static ActiveMQBuffer pooledDynamicBuffer(final int size) {
+   public static ActiveMQBuffer andyDynamicBuffer(final int size) {
       return new ChannelBufferWrapper(ALLOCATOR.buffer(size));
    }
 
