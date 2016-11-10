@@ -48,7 +48,7 @@ public class ManagementHelperTest extends Assert {
       String operationName = RandomUtil.randomString();
       String param = RandomUtil.randomString();
       String[] params = new String[]{RandomUtil.randomString(), RandomUtil.randomString(), RandomUtil.randomString()};
-      Message msg = new ClientMessageImpl((byte) 0, false, 0, 0, (byte) 4, 1000);
+      Message msg = new ClientMessageImpl((byte) 0, false, 0, 0, (byte) 4, 1000, false);
       ManagementHelper.putOperationInvocation(msg, resource, operationName, param, params);
 
       Object[] parameters = ManagementHelper.retrieveOperationParameters(msg);
@@ -135,7 +135,7 @@ public class ManagementHelperTest extends Assert {
 
       Object[] params = new Object[]{i, s, d, b, l, map, strArray, maps};
 
-      Message msg = new ClientMessageImpl((byte) 0, false, 0, 0, (byte) 4, 1000);
+      Message msg = new ClientMessageImpl((byte) 0, false, 0, 0, (byte) 4, 1000, false);
       ManagementHelper.putOperationInvocation(msg, resource, operationName, params);
 
       Object[] parameters = ManagementHelper.retrieveOperationParameters(msg);
@@ -201,7 +201,7 @@ public class ManagementHelperTest extends Assert {
 
       Object[] params = new Object[]{"hello", map};
 
-      Message msg = new ClientMessageImpl((byte) 0, false, 0, 0, (byte) 4, 1000);
+      Message msg = new ClientMessageImpl((byte) 0, false, 0, 0, (byte) 4, 1000, false);
       ManagementHelper.putOperationInvocation(msg, resource, operationName, params);
 
       Object[] parameters = ManagementHelper.retrieveOperationParameters(msg);

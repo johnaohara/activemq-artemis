@@ -51,7 +51,7 @@ final class SimpleClient {
             ClientProducer producer = session.createProducer(queueName);
             ClientConsumer consumer = session.createConsumer(queueName);
 
-            ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+            ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
             message.getBodyBuffer().writeString(messageText);
             producer.send(message);
 

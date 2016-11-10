@@ -553,12 +553,13 @@ public final class ClientSessionImpl implements ClientSessionInternal, FailureLi
                                       final boolean durable,
                                       final long expiration,
                                       final long timestamp,
-                                      final byte priority) {
-      return new ClientMessageImpl(type, durable, expiration, timestamp, priority, initialMessagePacketSize);
+                                      final byte priority,
+                                      final boolean wantPooled) {
+      return new ClientMessageImpl(type, durable, expiration, timestamp, priority, initialMessagePacketSize,wantPooled);
    }
 
    public ClientMessage createMessage(final byte type, final boolean durable) {
-      return this.createMessage(type, durable, 0, System.currentTimeMillis(), (byte) 4);
+      return this.createMessage(type, durable, 0, System.currentTimeMillis(), (byte) 4, false);
    }
 
    public ClientMessage createMessage(final boolean durable) {

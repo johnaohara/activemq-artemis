@@ -1530,7 +1530,7 @@ public abstract class ActiveMQTestBase extends Assert {
                                               final byte type,
                                               final byte[] b,
                                               final boolean durable) {
-      ClientMessage message = session.createMessage(type, durable, 0, System.currentTimeMillis(), (byte) 1);
+      ClientMessage message = session.createMessage(type, durable, 0, System.currentTimeMillis(), (byte) 1, false);
       message.getBodyBuffer().writeBytes(b);
       return message;
    }
@@ -2096,7 +2096,7 @@ public abstract class ActiveMQTestBase extends Assert {
    }
 
    protected ClientMessage createTextMessage(final ClientSession session, final String s, final boolean durable) {
-      ClientMessage message = session.createMessage(Message.TEXT_TYPE, durable, 0, System.currentTimeMillis(), (byte) 4);
+      ClientMessage message = session.createMessage(Message.TEXT_TYPE, durable, 0, System.currentTimeMillis(), (byte) 4, false);
       message.getBodyBuffer().writeString(s);
       return message;
    }

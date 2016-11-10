@@ -277,7 +277,7 @@ public class ScheduledMessageTest extends ActiveMQTestBase {
       ClientSession session = sessionFactory.createSession(false, true, false);
       session.createQueue(atestq, atestq, null, true);
       ClientProducer producer = session.createProducer(atestq);
-      ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+      ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
       message.getBodyBuffer().writeString("testINVMCoreClient");
       message.setDurable(true);
       long time = System.currentTimeMillis();
@@ -944,7 +944,7 @@ public class ScheduledMessageTest extends ActiveMQTestBase {
    }
 
    private ClientMessage createDurableMessage(final ClientSession session, final String body) {
-      ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, true, 0, System.currentTimeMillis(), (byte) 1);
+      ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, true, 0, System.currentTimeMillis(), (byte) 1, false);
       message.getBodyBuffer().writeString(body);
       return message;
    }

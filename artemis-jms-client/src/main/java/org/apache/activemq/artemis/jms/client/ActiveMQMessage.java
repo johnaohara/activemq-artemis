@@ -192,7 +192,7 @@ public class ActiveMQMessage implements javax.jms.Message {
     * Create a new message prior to sending
     */
    protected ActiveMQMessage(final byte type, final ClientSession session) {
-      message = session.createMessage(type, true, 0, System.currentTimeMillis(), (byte) 4);
+      message = session.createMessage(type, true, 0, System.currentTimeMillis(), (byte) 4, true);
 
    }
 

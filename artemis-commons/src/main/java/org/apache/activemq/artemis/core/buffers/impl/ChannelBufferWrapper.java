@@ -180,6 +180,21 @@ public class ChannelBufferWrapper implements ActiveMQBuffer {
       return buffer.capacity();
    }
 
+   @Override
+   public boolean release() {
+      if(this.buffer!=null){
+         return buffer.release();
+      }
+      return false;
+   }
+
+   @Override
+   public void retain() {
+      if(this.buffer!=null){
+         this.buffer.retain();
+      }
+   }
+
    public ByteBuf byteBuf() {
       return buffer;
    }

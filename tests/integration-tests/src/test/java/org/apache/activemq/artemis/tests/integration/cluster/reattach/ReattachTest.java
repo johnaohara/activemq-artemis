@@ -83,7 +83,7 @@ public class ReattachTest extends ActiveMQTestBase {
          final int numMessages = 100;
 
          for (int i = 0; i < numMessages; i++) {
-            ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+            ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
             message.putIntProperty(new SimpleString("count"), i);
             message.getBodyBuffer().writeString("aardvarks");
             producer.send(message);
@@ -170,7 +170,7 @@ public class ReattachTest extends ActiveMQTestBase {
       final int numMessages = 10;
 
       for (int i = 0; i < numMessages; i++) {
-         ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+         ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
          message.putIntProperty(new SimpleString("count"), i);
          message.getBodyBuffer().writeBytes(new byte[5000]);
          producer.send(message);
@@ -206,7 +206,7 @@ public class ReattachTest extends ActiveMQTestBase {
       final int numMessages = 1000;
 
       for (int i = 0; i < numMessages; i++) {
-         ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+         ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
          message.putIntProperty(new SimpleString("count"), i);
          message.getBodyBuffer().writeString("aardvarks");
          producer.send(message);
@@ -308,7 +308,7 @@ public class ReattachTest extends ActiveMQTestBase {
       final int numMessages = 1000;
 
       for (int i = 0; i < numMessages; i++) {
-         ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+         ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
          message.putIntProperty(new SimpleString("count"), i);
          message.getBodyBuffer().writeString("aardvarks");
          producer.send(message);
@@ -390,7 +390,7 @@ public class ReattachTest extends ActiveMQTestBase {
       final int numMessages = 1000;
 
       for (int i = 0; i < numMessages; i++) {
-         ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+         ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
          message.putIntProperty(new SimpleString("count"), i);
          message.getBodyBuffer().writeString("aardvarks");
          producer.send(message);
@@ -713,7 +713,7 @@ public class ReattachTest extends ActiveMQTestBase {
       final int numMessages = 1000;
 
       for (int i = 0; i < numMessages; i++) {
-         ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+         ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
          message.putIntProperty(new SimpleString("count"), i);
          message.getBodyBuffer().writeString("aardvarks");
          producer.send(message);
@@ -772,7 +772,7 @@ public class ReattachTest extends ActiveMQTestBase {
       final int numMessages = 1000;
 
       for (int i = 0; i < numMessages; i++) {
-         ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+         ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
          message.putIntProperty(new SimpleString("count"), i);
          message.getBodyBuffer().writeString("aardvarks");
          producer.send(message);
@@ -852,7 +852,7 @@ public class ReattachTest extends ActiveMQTestBase {
       final int numMessages = 1000;
 
       for (int i = 0; i < numMessages; i++) {
-         ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+         ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
          message.putIntProperty(new SimpleString("count"), i);
          message.getBodyBuffer().writeString("aardvarks");
          producer.send(message);
@@ -921,7 +921,7 @@ public class ReattachTest extends ActiveMQTestBase {
       final int numMessages = 1000;
 
       for (int i = 0; i < numMessages; i++) {
-         ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+         ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
          message.putIntProperty(new SimpleString("count"), i);
          message.getBodyBuffer().writeString("aardvarks");
          producer.send(message);

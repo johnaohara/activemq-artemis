@@ -953,7 +953,7 @@ public abstract class MultiThreadRandomReattachTestBase extends MultiThreadReatt
 
       ClientProducer producer = sess.createProducer(MultiThreadRandomReattachTestBase.ADDRESS);
 
-      ClientMessage message = sess.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+      ClientMessage message = sess.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
       producer.send(message);
 
       ClientMessage message2 = consumer.receive(MultiThreadRandomReattachTestBase.RECEIVE_TIMEOUT);
@@ -984,7 +984,7 @@ public abstract class MultiThreadRandomReattachTestBase extends MultiThreadReatt
 
       ClientProducer producer = sess.createProducer(MultiThreadRandomReattachTestBase.ADDRESS);
 
-      ClientMessage message = sess.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+      ClientMessage message = sess.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
       producer.send(message);
 
       ClientMessage message2 = consumer.receive(MultiThreadRandomReattachTestBase.RECEIVE_TIMEOUT);
@@ -1052,7 +1052,7 @@ public abstract class MultiThreadRandomReattachTestBase extends MultiThreadReatt
 
       ClientProducer producer = sess.createProducer(MultiThreadRandomReattachTestBase.ADDRESS);
 
-      ClientMessage message = sess.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+      ClientMessage message = sess.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
       producer.send(message);
 
       sess.start();
@@ -1147,7 +1147,7 @@ public abstract class MultiThreadRandomReattachTestBase extends MultiThreadReatt
                              final int numMessages,
                              final int threadNum) throws Exception {
       for (int i = 0; i < numMessages; i++) {
-         ClientMessage message = sessSend.createMessage(ActiveMQBytesMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+         ClientMessage message = sessSend.createMessage(ActiveMQBytesMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
          message.putIntProperty(new SimpleString("threadnum"), threadNum);
          message.putIntProperty(new SimpleString("count"), i);
          setBody(message);

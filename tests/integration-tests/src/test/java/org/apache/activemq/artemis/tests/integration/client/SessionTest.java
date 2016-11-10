@@ -284,7 +284,7 @@ public class SessionTest extends ActiveMQTestBase {
    public void testCreateMessageOverrides() throws Exception {
       cf = createSessionFactory(locator);
       ClientSession clientSession = cf.createSession(false, true, true);
-      ClientMessage clientMessage = clientSession.createMessage((byte) 88, false, 100L, 300L, (byte) 33);
+      ClientMessage clientMessage = clientSession.createMessage((byte) 88, false, 100L, 300L, (byte) 33, false);
       Assert.assertEquals((byte) 88, clientMessage.getType());
       Assert.assertEquals(100L, clientMessage.getExpiration());
       Assert.assertEquals(300L, clientMessage.getTimestamp());

@@ -344,6 +344,16 @@ public class AcknowledgeTest extends ActiveMQTestBase {
       }
 
       @Override
+      public boolean release() {
+         return false;
+      }
+
+      @Override
+      public void retain() {
+
+      }
+
+      @Override
       public long getMessageID() {
          return id;
       }

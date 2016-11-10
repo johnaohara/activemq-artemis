@@ -256,7 +256,7 @@ public class RandomReattachTest extends ActiveMQTestBase {
       ClientProducer producer = sessSend.createProducer(RandomReattachTest.ADDRESS);
 
       for (int i = 0; i < numMessages; i++) {
-         ClientMessage message = sessSend.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+         ClientMessage message = sessSend.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
          message.putIntProperty(new SimpleString("count"), i);
          producer.send(message);
       }
@@ -357,7 +357,7 @@ public class RandomReattachTest extends ActiveMQTestBase {
       ClientProducer producer = sessSend.createProducer(RandomReattachTest.ADDRESS);
 
       for (int i = 0; i < numMessages; i++) {
-         ClientMessage message = sessSend.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+         ClientMessage message = sessSend.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
          message.putIntProperty(new SimpleString("count"), i);
          producer.send(message);
       }
@@ -459,7 +459,7 @@ public class RandomReattachTest extends ActiveMQTestBase {
       ClientProducer producer = sessSend.createProducer(RandomReattachTest.ADDRESS);
 
       for (int i = 0; i < numMessages; i++) {
-         ClientMessage message = sessSend.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+         ClientMessage message = sessSend.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
          message.putIntProperty(new SimpleString("count"), i);
          producer.send(message);
       }
@@ -467,7 +467,7 @@ public class RandomReattachTest extends ActiveMQTestBase {
       sessSend.rollback();
 
       for (int i = 0; i < numMessages; i++) {
-         ClientMessage message = sessSend.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+         ClientMessage message = sessSend.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
          message.putIntProperty(new SimpleString("count"), i);
          producer.send(message);
       }
@@ -598,7 +598,7 @@ public class RandomReattachTest extends ActiveMQTestBase {
       ClientProducer producer = sessSend.createProducer(RandomReattachTest.ADDRESS);
 
       for (int i = 0; i < numMessages; i++) {
-         ClientMessage message = sessSend.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+         ClientMessage message = sessSend.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
          message.putIntProperty(new SimpleString("count"), i);
          producer.send(message);
       }
@@ -606,7 +606,7 @@ public class RandomReattachTest extends ActiveMQTestBase {
       sessSend.rollback();
 
       for (int i = 0; i < numMessages; i++) {
-         ClientMessage message = sessSend.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+         ClientMessage message = sessSend.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
          message.putIntProperty(new SimpleString("count"), i);
          producer.send(message);
       }
@@ -737,7 +737,7 @@ public class RandomReattachTest extends ActiveMQTestBase {
       ClientProducer producer = sessSend.createProducer(RandomReattachTest.ADDRESS);
 
       for (int i = 0; i < numMessages; i++) {
-         ClientMessage message = sessSend.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+         ClientMessage message = sessSend.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
          message.putIntProperty(new SimpleString("count"), i);
          producer.send(message);
       }
@@ -811,7 +811,7 @@ public class RandomReattachTest extends ActiveMQTestBase {
       ClientProducer producer = sessSend.createProducer(RandomReattachTest.ADDRESS);
 
       for (int i = 0; i < numMessages; i++) {
-         ClientMessage message = sessSend.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+         ClientMessage message = sessSend.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
          message.putIntProperty(new SimpleString("count"), i);
          producer.send(message);
       }
@@ -897,7 +897,7 @@ public class RandomReattachTest extends ActiveMQTestBase {
       ClientProducer producer = sessSend.createProducer(RandomReattachTest.ADDRESS);
 
       for (int i = 0; i < numMessages; i++) {
-         ClientMessage message = sessSend.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+         ClientMessage message = sessSend.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
          message.putIntProperty(new SimpleString("count"), i);
          producer.send(message);
       }
@@ -905,7 +905,7 @@ public class RandomReattachTest extends ActiveMQTestBase {
       sessSend.rollback();
 
       for (int i = 0; i < numMessages; i++) {
-         ClientMessage message = sessSend.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+         ClientMessage message = sessSend.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
          message.putIntProperty(new SimpleString("count"), i);
          producer.send(message);
       }
@@ -1007,7 +1007,7 @@ public class RandomReattachTest extends ActiveMQTestBase {
       ClientProducer producer = sessSend.createProducer(RandomReattachTest.ADDRESS);
 
       for (int i = 0; i < numMessages; i++) {
-         ClientMessage message = sessSend.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+         ClientMessage message = sessSend.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
          message.putIntProperty(new SimpleString("count"), i);
          producer.send(message);
       }
@@ -1015,7 +1015,7 @@ public class RandomReattachTest extends ActiveMQTestBase {
       sessSend.rollback();
 
       for (int i = 0; i < numMessages; i++) {
-         ClientMessage message = sessSend.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+         ClientMessage message = sessSend.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
          message.putIntProperty(new SimpleString("count"), i);
          producer.send(message);
       }
@@ -1105,7 +1105,7 @@ public class RandomReattachTest extends ActiveMQTestBase {
 
       ClientProducer producer = sess.createProducer(RandomReattachTest.ADDRESS);
 
-      ClientMessage message = sess.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+      ClientMessage message = sess.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
       producer.send(message);
 
       ClientMessage message2 = consumer.receive(RandomReattachTest.RECEIVE_TIMEOUT);
@@ -1134,7 +1134,7 @@ public class RandomReattachTest extends ActiveMQTestBase {
 
       ClientProducer producer = sess.createProducer(RandomReattachTest.ADDRESS);
 
-      ClientMessage message = sess.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+      ClientMessage message = sess.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
       producer.send(message);
 
       ClientMessage message2 = consumer.receive(RandomReattachTest.RECEIVE_TIMEOUT);
@@ -1195,7 +1195,7 @@ public class RandomReattachTest extends ActiveMQTestBase {
 
       ClientProducer producer = sess.createProducer(RandomReattachTest.ADDRESS);
 
-      ClientMessage message = sess.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+      ClientMessage message = sess.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
       producer.send(message);
 
       sess.start();

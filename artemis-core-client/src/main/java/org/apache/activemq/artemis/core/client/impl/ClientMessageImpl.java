@@ -65,8 +65,9 @@ public class ClientMessageImpl extends MessageImpl implements ClientMessageInter
                             final long expiration,
                             final long timestamp,
                             final byte priority,
-                            final int initialMessageBufferSize) {
-      super(type, durable, expiration, timestamp, priority, initialMessageBufferSize);
+                            final int initialMessageBufferSize,
+                            final boolean wantPooled) {
+      super(type, durable, expiration, timestamp, priority, initialMessageBufferSize, wantPooled);
    }
 
    @Override

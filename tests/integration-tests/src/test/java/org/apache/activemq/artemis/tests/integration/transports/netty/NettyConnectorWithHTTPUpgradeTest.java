@@ -153,7 +153,7 @@ public class NettyConnectorWithHTTPUpgradeTest extends ActiveMQTestBase {
       final int numMessages = 100;
 
       for (int i = 0; i < numMessages; i++) {
-         ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+         ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
          message.getBodyBuffer().writeString("sendAndReceiveOverHTTPPort");
          producer.send(message);
       }

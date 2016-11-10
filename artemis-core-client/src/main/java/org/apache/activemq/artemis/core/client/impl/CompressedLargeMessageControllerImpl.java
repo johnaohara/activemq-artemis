@@ -614,6 +614,16 @@ final class CompressedLargeMessageControllerImpl implements LargeMessageControll
 
    // Inner classes -------------------------------------------------
 
+   @Override
+   public boolean release() {
+      return false;
+   }
+
+   @Override
+   public void retain() {
+
+   }
+
    public ByteBuf byteBuf() {
       return null;
    }

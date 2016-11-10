@@ -83,6 +83,10 @@ public interface Message {
 
    byte STREAM_TYPE = 6;
 
+
+   boolean release();
+   void retain();
+
    /**
     * Returns the messageID.
     * <br>

@@ -74,7 +74,7 @@ public class CoreClientOverHttpTest extends ActiveMQTestBase {
       final int numMessages = 100;
 
       for (int i = 0; i < numMessages; i++) {
-         ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+         ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
          message.getBodyBuffer().writeString("CoreClientOverHttpTest");
          producer.send(message);
       }
@@ -125,7 +125,7 @@ public class CoreClientOverHttpTest extends ActiveMQTestBase {
       String[] content = new String[numMessages];
 
       for (int i = 0; i < numMessages; i++) {
-         ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+         ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
          content[i] = this.getFixedSizeString(((i % 5) + 1) * 1024 * 8);
          message.getBodyBuffer().writeString(content[i]);
          producer.send(message);

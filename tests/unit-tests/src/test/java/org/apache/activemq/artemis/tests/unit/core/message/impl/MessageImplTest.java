@@ -46,7 +46,7 @@ public class MessageImplTest extends ActiveMQTestBase {
          final long expiration = RandomUtil.randomLong();
          final long timestamp = RandomUtil.randomLong();
          final byte priority = RandomUtil.randomByte();
-         Message message1 = new ClientMessageImpl(type, durable, expiration, timestamp, priority, 100);
+         Message message1 = new ClientMessageImpl(type, durable, expiration, timestamp, priority, 100, false);
 
          Message message = message1;
 

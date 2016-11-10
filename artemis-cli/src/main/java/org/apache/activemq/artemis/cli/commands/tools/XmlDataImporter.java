@@ -253,7 +253,7 @@ public final class XmlDataImporter extends ActionAbstract {
          }
       }
 
-      Message message = session.createMessage(type, true, expiration, timestamp, priority);
+      Message message = session.createMessage(type, true, expiration, timestamp, priority, false);
       message.setUserID(userId);
 
       boolean endLoop = false;

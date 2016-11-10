@@ -1168,13 +1168,13 @@ public class BasicXaRecoveryTest extends ActiveMQTestBase {
    }
 
    private ClientMessage createTextMessage(final String s, final boolean durable) {
-      ClientMessage message = clientSession.createMessage(ActiveMQTextMessage.TYPE, durable, 0, System.currentTimeMillis(), (byte) 1);
+      ClientMessage message = clientSession.createMessage(ActiveMQTextMessage.TYPE, durable, 0, System.currentTimeMillis(), (byte) 1, false);
       message.getBodyBuffer().writeString(s);
       return message;
    }
 
    private ClientMessage createBytesMessage(final byte[] b, final boolean durable) {
-      ClientMessage message = clientSession.createMessage(ActiveMQBytesMessage.TYPE, durable, 0, System.currentTimeMillis(), (byte) 1);
+      ClientMessage message = clientSession.createMessage(ActiveMQBytesMessage.TYPE, durable, 0, System.currentTimeMillis(), (byte) 1, false);
       message.getBodyBuffer().writeBytes(b);
       return message;
    }

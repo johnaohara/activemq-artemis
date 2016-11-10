@@ -112,7 +112,7 @@ public class StompSession implements SessionCallback {
             int bodySize = (int) encoder.getLargeBodySize();
 
             //large message doesn't have a body.
-            ((ServerMessageImpl) newServerMessage).createBody(bodySize);
+            ((ServerMessageImpl) newServerMessage).createBody(bodySize, false);
             encoder.encode(newServerMessage.getBodyBuffer(), bodySize);
             encoder.close();
          }

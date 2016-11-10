@@ -52,7 +52,7 @@ public class CrashClient {
          ClientProducer producer = session.createProducer(ClientCrashTest.QUEUE);
 
          // it has to be durable otherwise it may race dying before the client is killed
-         ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, true, 0, System.currentTimeMillis(), (byte) 1);
+         ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, true, 0, System.currentTimeMillis(), (byte) 1, false);
          message.getBodyBuffer().writeString(ClientCrashTest.MESSAGE_TEXT_FROM_CLIENT);
 
          producer.send(message);

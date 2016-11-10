@@ -154,7 +154,7 @@ public final class ClientLargeMessageImpl extends ClientMessageImpl implements C
          if (bodySize > Integer.MAX_VALUE) {
             bodySize = Integer.MAX_VALUE;
          }
-         createBody((int) bodySize);
+         createBody((int) bodySize, false);
 
          bodyBuffer = new ResetLimitWrappedActiveMQBuffer(BODY_OFFSET, buffer, this);
 

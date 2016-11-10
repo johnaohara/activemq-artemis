@@ -109,19 +109,20 @@ public abstract class MessageImpl implements MessageInternal {
                          final long expiration,
                          final long timestamp,
                          final byte priority,
-                         final int initialMessageBufferSize) {
+                         final int initialMessageBufferSize,
+                         final boolean wantPooled) {
       this();
       this.type = type;
       this.durable = durable;
       this.expiration = expiration;
       this.timestamp = timestamp;
       this.priority = priority;
-      createBody(initialMessageBufferSize);
+      createBody(initialMessageBufferSize,wantPooled);
    }
 
    protected MessageImpl(final int initialMessageBufferSize) {
       this();
-      createBody(initialMessageBufferSize);
+      createBody(initialMessageBufferSize,false);
    }
 
    /*
@@ -164,6 +165,20 @@ public abstract class MessageImpl implements MessageInternal {
             bodyBuffer.readerIndex(BODY_OFFSET);
             bodyBuffer.writerIndex(other.getBodyBuffer().writerIndex());
          }
+      }
+   }
+
+   @Override
+   public boolean release(){
+      if(this.buffer != null){
+         return this.buffer.release();
+      }
+      return false;
+   }
+   @Override
+   public void retain(){
+      if(this.buffer!=null){
+         this.buffer.retain();
       }
    }
 
@@ -899,8 +914,8 @@ public abstract class MessageImpl implements MessageInternal {
       bufferValid = true;
    }
 
-   public void createBody(final int initialMessageBufferSize) {
-      buffer = ActiveMQBuffers.dynamicBuffer(initialMessageBufferSize);
+   public void createBody(final int initialMessageBufferSize,final boolean wantPooled) {
+      buffer = wantPooled ? ActiveMQBuffers.pooledDynamicBuffer(initialMessageBufferSize) : ActiveMQBuffers.dynamicBuffer(initialMessageBufferSize);
 
       // There's a bug in netty which means a dynamic buffer won't resize until you write a byte
       buffer.writeByte((byte) 0);

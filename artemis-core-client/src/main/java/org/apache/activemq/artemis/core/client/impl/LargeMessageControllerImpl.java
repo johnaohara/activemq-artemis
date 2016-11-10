@@ -1211,6 +1211,16 @@ public class LargeMessageControllerImpl implements LargeMessageController {
       return ByteUtil.readLine(this);
    }
 
+   @Override
+   public boolean release() {
+      return false;
+   }
+
+   @Override
+   public void retain() {
+
+   }
+
    public ByteBuf byteBuf() {
       return null;
    }

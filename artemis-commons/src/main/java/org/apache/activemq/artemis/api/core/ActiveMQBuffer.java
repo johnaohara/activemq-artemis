@@ -32,6 +32,10 @@ import io.netty.buffer.ByteBuf;
  */
 public interface ActiveMQBuffer extends DataInput {
 
+
+   boolean release();
+   void retain();
+
    /**
     * Returns the underlying Netty's ByteBuf
     *

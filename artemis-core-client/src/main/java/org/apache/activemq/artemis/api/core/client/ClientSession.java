@@ -578,7 +578,7 @@ public interface ClientSession extends XAResource, AutoCloseable {
     * @param priority   the message priority (between 0 and 9 inclusive)
     * @return a ClientMessage
     */
-   ClientMessage createMessage(byte type, boolean durable, long expiration, long timestamp, byte priority);
+   ClientMessage createMessage(byte type, boolean durable, long expiration, long timestamp, byte priority, boolean wantPooled);
 
    // Query operations ----------------------------------------------
 

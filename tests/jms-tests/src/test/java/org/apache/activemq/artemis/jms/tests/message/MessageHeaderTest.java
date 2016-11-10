@@ -676,7 +676,7 @@ public class MessageHeaderTest extends MessageHeaderTestBase {
 
    @Test
    public void testCopyOnJBossMessage() throws JMSException {
-      ClientMessage clientMessage = new ClientMessageImpl(ActiveMQTextMessage.TYPE, true, 0, System.currentTimeMillis(), (byte) 4, 1000);
+      ClientMessage clientMessage = new ClientMessageImpl(ActiveMQTextMessage.TYPE, true, 0, System.currentTimeMillis(), (byte) 4, 1000, false);
       ClientSession session = new FakeSession(clientMessage);
       ActiveMQMessage jbossMessage = ActiveMQMessage.createMessage(clientMessage, session);
       jbossMessage.clearProperties();
@@ -690,7 +690,7 @@ public class MessageHeaderTest extends MessageHeaderTestBase {
 
    @Test
    public void testCopyOnForeignMessage() throws JMSException {
-      ClientMessage clientMessage = new ClientMessageImpl(ActiveMQTextMessage.TYPE, true, 0, System.currentTimeMillis(), (byte) 4, 1000);
+      ClientMessage clientMessage = new ClientMessageImpl(ActiveMQTextMessage.TYPE, true, 0, System.currentTimeMillis(), (byte) 4, 1000, false);
       ClientSession session = new FakeSession(clientMessage);
 
       Message foreignMessage = new SimpleJMSMessage();
@@ -703,7 +703,7 @@ public class MessageHeaderTest extends MessageHeaderTestBase {
 
    @Test
    public void testCopyOnForeignBytesMessage() throws JMSException {
-      ClientMessage clientMessage = new ClientMessageImpl(ActiveMQTextMessage.TYPE, true, 0, System.currentTimeMillis(), (byte) 4, 1000);
+      ClientMessage clientMessage = new ClientMessageImpl(ActiveMQTextMessage.TYPE, true, 0, System.currentTimeMillis(), (byte) 4, 1000, false);
       ClientSession session = new FakeSession(clientMessage);
 
       BytesMessage foreignBytesMessage = new SimpleJMSBytesMessage();
@@ -721,7 +721,7 @@ public class MessageHeaderTest extends MessageHeaderTestBase {
 
    @Test
    public void testCopyOnForeignMapMessage() throws JMSException {
-      ClientMessage clientMessage = new ClientMessageImpl(ActiveMQTextMessage.TYPE, true, 0, System.currentTimeMillis(), (byte) 4, 1000);
+      ClientMessage clientMessage = new ClientMessageImpl(ActiveMQTextMessage.TYPE, true, 0, System.currentTimeMillis(), (byte) 4, 1000, false);
       ClientSession session = new FakeSession(clientMessage);
       MapMessage foreignMapMessage = new SimpleJMSMapMessage();
       foreignMapMessage.setInt("int", 1);
@@ -734,7 +734,7 @@ public class MessageHeaderTest extends MessageHeaderTestBase {
 
    @Test
    public void testCopyOnForeignObjectMessage() throws JMSException {
-      ClientMessage clientMessage = new ClientMessageImpl(ActiveMQTextMessage.TYPE, true, 0, System.currentTimeMillis(), (byte) 4, 1000);
+      ClientMessage clientMessage = new ClientMessageImpl(ActiveMQTextMessage.TYPE, true, 0, System.currentTimeMillis(), (byte) 4, 1000, false);
       ClientSession session = new FakeSession(clientMessage);
 
       ObjectMessage foreignObjectMessage = new SimpleJMSObjectMessage();
@@ -746,7 +746,7 @@ public class MessageHeaderTest extends MessageHeaderTestBase {
 
    @Test
    public void testCopyOnForeignStreamMessage() throws JMSException {
-      ClientMessage clientMessage = new ClientMessageImpl(ActiveMQTextMessage.TYPE, true, 0, System.currentTimeMillis(), (byte) 4, 1000);
+      ClientMessage clientMessage = new ClientMessageImpl(ActiveMQTextMessage.TYPE, true, 0, System.currentTimeMillis(), (byte) 4, 1000, false);
       ClientSession session = new FakeSession(clientMessage);
 
       StreamMessage foreignStreamMessage = new SimpleJMSStreamMessage();
@@ -761,7 +761,7 @@ public class MessageHeaderTest extends MessageHeaderTestBase {
 
    @Test
    public void testCopyOnForeignTextMessage() throws JMSException {
-      ClientMessage clientMessage = new ClientMessageImpl(ActiveMQTextMessage.TYPE, true, 0, System.currentTimeMillis(), (byte) 4, 1000);
+      ClientMessage clientMessage = new ClientMessageImpl(ActiveMQTextMessage.TYPE, true, 0, System.currentTimeMillis(), (byte) 4, 1000, false);
       ClientSession session = new FakeSession(clientMessage);
       TextMessage foreignTextMessage = new SimpleJMSTextMessage();
 
@@ -1097,6 +1097,11 @@ public class MessageHeaderTest extends MessageHeaderTestBase {
       }
 
       public ClientMessage createMessage(final byte type, final boolean durable) {
+         return message;
+      }
+
+      @Override
+      public ClientMessage createMessage(byte type, boolean durable, long expiration, long timestamp, byte priority, boolean wantPooled) {
          return message;
       }
 

@@ -182,7 +182,7 @@ public class OrderReattachTest extends ActiveMQTestBase {
       ClientProducer producer = sessSend.createProducer(ADDRESS);
 
       for (int i = 0; i < numMessages; i++) {
-         ClientMessage message = sessSend.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+         ClientMessage message = sessSend.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
 
          if (i % 10 == 0) {
             // failureQueue.push(true);

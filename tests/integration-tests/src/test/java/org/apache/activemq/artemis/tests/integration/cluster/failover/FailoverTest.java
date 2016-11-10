@@ -2135,7 +2135,7 @@ public class FailoverTest extends FailoverTestBase {
       ClientProducer producer = session.createProducer(FailoverTestBase.ADDRESS);
 
       for (int i = 0; i < NUM_MESSAGES; i++) {
-         ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1);
+         ClientMessage message = session.createMessage(ActiveMQTextMessage.TYPE, false, 0, System.currentTimeMillis(), (byte) 1, false);
          message.putIntProperty(new SimpleString("count"), i);
          message.getBodyBuffer().writeString("aardvarks");
          producer.send(message);

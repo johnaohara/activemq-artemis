@@ -17,9 +17,7 @@
 package org.apache.activemq.artemis.jms.client;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 import javax.jms.BytesMessage;
 import javax.jms.Destination;
@@ -59,6 +57,7 @@ import org.apache.activemq.artemis.api.core.client.ClientProducer;
 import org.apache.activemq.artemis.api.core.client.ClientSession;
 import org.apache.activemq.artemis.api.core.client.ClientSession.AddressQuery;
 import org.apache.activemq.artemis.api.core.client.ClientSession.QueueQuery;
+
 
 /**
  * ActiveMQ Artemis implementation of a JMS Session.
@@ -113,30 +112,38 @@ public class ActiveMQSession implements QueueSession, TopicSession {
       this.xa = xa;
    }
 
+   ArrayList<ActiveMQMessage> createdMessages = new ArrayList<>();
+
    // Session implementation ----------------------------------------
 
    public BytesMessage createBytesMessage() throws JMSException {
       checkClosed();
-
-      return new ActiveMQBytesMessage(session);
+      ActiveMQBytesMessage rtrn = new ActiveMQBytesMessage(session);
+      createdMessages.add(rtrn);
+      return rtrn;
    }
 
    public MapMessage createMapMessage() throws JMSException {
       checkClosed();
-
-      return new ActiveMQMapMessage(session);
+      ActiveMQMapMessage rtrn = new ActiveMQMapMessage(session);
+      createdMessages.add(rtrn);
+      return rtrn;
    }
 
    public Message createMessage() throws JMSException {
       checkClosed();
 
-      return new ActiveMQMessage(session);
+      ActiveMQMessage rtrn = new ActiveMQMessage(session);
+      createdMessages.add(rtrn);
+      return rtrn;
    }
 
    public ObjectMessage createObjectMessage() throws JMSException {
       checkClosed();
 
-      return new ActiveMQObjectMessage(session);
+      ActiveMQObjectMessage rtrn = new ActiveMQObjectMessage(session);
+      createdMessages.add(rtrn);
+      return rtrn;
    }
 
    public ObjectMessage createObjectMessage(final Serializable object) throws JMSException {
@@ -145,14 +152,16 @@ public class ActiveMQSession implements QueueSession, TopicSession {
       ActiveMQObjectMessage msg = new ActiveMQObjectMessage(session);
 
       msg.setObject(object);
-
+      createdMessages.add(msg);
       return msg;
    }
 
    public StreamMessage createStreamMessage() throws JMSException {
       checkClosed();
 
-      return new ActiveMQStreamMessage(session);
+      ActiveMQStreamMessage rtrn =  new ActiveMQStreamMessage(session);
+      createdMessages.add(rtrn);
+      return rtrn;
    }
 
    public TextMessage createTextMessage() throws JMSException {
@@ -162,6 +171,7 @@ public class ActiveMQSession implements QueueSession, TopicSession {
 
       msg.setText(null);
 
+      createdMessages.add(msg);
       return msg;
    }
 
@@ -172,6 +182,7 @@ public class ActiveMQSession implements QueueSession, TopicSession {
 
       msg.setText(text);
 
+      createdMessages.add(msg);
       return msg;
    }
 
@@ -237,6 +248,11 @@ public class ActiveMQSession implements QueueSession, TopicSession {
          }
          catch (ActiveMQException e) {
             throw JMSExceptionHelper.convertFromActiveMQException(e);
+         }
+      }
+      if(!createdMessages.isEmpty()){
+         for(ActiveMQMessage message : createdMessages){
+            message.getCoreMessage().release();
          }
       }
    }
