@@ -117,7 +117,7 @@ public interface RemotingConnection extends BufferHandler {
     * @param size the size of buffer required
     * @return the buffer
     */
-   ActiveMQBuffer createTransportBuffer(int size);
+   ActiveMQBuffer createTransportBuffer(int size, ActiveMQBuffer existingBuffer);
 
    /**
     * called when the underlying connection fails.

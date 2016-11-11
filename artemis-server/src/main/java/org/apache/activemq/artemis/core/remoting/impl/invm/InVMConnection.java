@@ -23,6 +23,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
 
+import io.netty.buffer.UnpooledHeapByteBuf;
 import io.netty.channel.ChannelFutureListener;
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
 import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
@@ -132,7 +133,12 @@ public class InVMConnection implements Connection {
       }
    }
 
-   public ActiveMQBuffer createTransportBuffer(final int size) {
+   @Override
+   public ActiveMQBuffer createTransportBuffer(final int size, ActiveMQBuffer buffer) {
+//      if(buffer != null && buffer.byteBuf() instanceof ByteBuffer)
+      if(buffer != null ){
+         return buffer;
+      }
       return ActiveMQBuffers.dynamicBuffer(size);
    }
 

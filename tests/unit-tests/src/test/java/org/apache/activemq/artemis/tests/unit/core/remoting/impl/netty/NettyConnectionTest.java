@@ -66,7 +66,7 @@ public class NettyConnectionTest extends ActiveMQTestBase {
 
       final int size = 1234;
 
-      ActiveMQBuffer buff = conn.createTransportBuffer(size);
+      ActiveMQBuffer buff = conn.createTransportBuffer(size, null);
       buff.writeByte((byte) 0x00); // Netty buffer does lazy initialization.
       Assert.assertEquals(size, buff.capacity());
 

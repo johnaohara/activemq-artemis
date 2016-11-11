@@ -212,6 +212,11 @@ public final class StompConnection implements RemotingConnection {
       failureListeners.addAll(listeners);
    }
 
+   @Override
+   public ActiveMQBuffer createTransportBuffer(int size, ActiveMQBuffer existingBuffer) {
+      return ActiveMQBuffers.dynamicBuffer(size);
+   }
+
    protected synchronized void setDataReceived() {
       dataReceived = true;
    }
@@ -251,10 +256,6 @@ public final class StompConnection implements RemotingConnection {
       return autoCreated;
    }
 
-   @Override
-   public ActiveMQBuffer createTransportBuffer(int size) {
-      return ActiveMQBuffers.dynamicBuffer(size);
-   }
 
    public void destroy() {
       synchronized (failLock) {
