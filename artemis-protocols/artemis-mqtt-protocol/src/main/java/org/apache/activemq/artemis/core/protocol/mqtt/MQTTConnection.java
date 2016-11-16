@@ -128,8 +128,8 @@ public class MQTTConnection implements RemotingConnection {
    }
 
    @Override
-   public ActiveMQBuffer createTransportBuffer(int size, ActiveMQBuffer buffer) {
-      return transportConnection.createTransportBuffer(size, buffer);
+   public ActiveMQBuffer createTransportBuffer(int size) {
+      return transportConnection.createTransportBuffer(size);
    }
 
    @Override

@@ -34,7 +34,7 @@ public class NettyServerConnection extends NettyConnection {
    }
 
    @Override
-   public ActiveMQBuffer createTransportBuffer(int size, ActiveMQBuffer buffer) {
+   public ActiveMQBuffer createTransportBuffer(int size) {
       return new ChannelBufferWrapper(channel.alloc().directBuffer(size), true);
    }
 }

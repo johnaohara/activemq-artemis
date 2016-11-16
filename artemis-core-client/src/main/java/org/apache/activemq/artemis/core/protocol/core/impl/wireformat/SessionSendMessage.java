@@ -69,14 +69,11 @@ public class SessionSendMessage extends MessagePacket {
          bufferWrite = buffer.copy(0, buffer.capacity());
       }
       else {
-         bufferWrite = connection.createTransportBuffer(buffer.writerIndex() + 1, buffer); // 1 for the requireResponse
+         bufferWrite = connection.createTransportBuffer(buffer.writerIndex() + 1); // 1 for the requireResponse
       }
+      bufferWrite.writeBytes(buffer, 0, buffer.writerIndex());
+      bufferWrite.setIndex(buffer.readerIndex(), buffer.writerIndex());
 
-      if(bufferWrite != buffer ){
-         bufferWrite.writeBytes( buffer, 0, buffer.writerIndex() );
-         bufferWrite.setIndex( buffer.readerIndex(), buffer.writerIndex() );
-
-      }
       // Sanity check
       if (bufferWrite.writerIndex() != message.getEndOfMessagePosition()) {
          throw new IllegalStateException("Wrong encode position");

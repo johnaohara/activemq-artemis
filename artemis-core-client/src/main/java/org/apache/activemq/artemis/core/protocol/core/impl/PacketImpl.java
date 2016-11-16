@@ -266,7 +266,7 @@ public class PacketImpl implements Packet {
    }
 
    public ActiveMQBuffer encode(final RemotingConnection connection) {
-      ActiveMQBuffer buffer = connection.createTransportBuffer(PacketImpl.INITIAL_PACKET_SIZE, null);
+      ActiveMQBuffer buffer = connection.createTransportBuffer(PacketImpl.INITIAL_PACKET_SIZE);
 
       // The standard header fields
 

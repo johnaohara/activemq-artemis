@@ -134,11 +134,7 @@ public class InVMConnection implements Connection {
    }
 
    @Override
-   public ActiveMQBuffer createTransportBuffer(final int size, ActiveMQBuffer buffer) {
-//      if(buffer != null && buffer.byteBuf() instanceof ByteBuffer)
-      if(buffer != null ){
-         return buffer;
-      }
+   public ActiveMQBuffer createTransportBuffer(final int size) {
       return ActiveMQBufferFactory.dynamicBuffer(size);
    }
 
