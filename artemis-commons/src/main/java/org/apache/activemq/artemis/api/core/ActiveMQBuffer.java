@@ -24,11 +24,11 @@ import io.netty.buffer.ByteBuf;
 /**
  * An ActiveMQBuffer wraps a Netty's ChannelBuffer and is used throughout ActiveMQ Artemis code base.
  * <p>
- * Instances of it can be obtained from {@link ActiveMQBuffers} factory.
+ * Instances of it can be obtained from {@link UnpooledActiveMQBuffers} factory.
  * <p>
  * Much of it derived from Netty ChannelBuffer by Trustin Lee
  *
- * @see ActiveMQBuffers
+ * @see UnpooledActiveMQBuffers
  */
 public interface ActiveMQBuffer extends DataInput {
 

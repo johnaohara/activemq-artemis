@@ -26,7 +26,8 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.api.core.ActiveMQInterruptedException;
 import org.apache.activemq.artemis.core.io.IOCallback;
 import org.apache.activemq.artemis.core.journal.EncodingSupport;
@@ -105,7 +106,7 @@ public class TimedBuffer {
       }
       // Setting the interval for nano-sleeps
 
-      buffer = ActiveMQBuffers.fixedBuffer(bufferSize);
+      buffer = ActiveMQBufferFactory.fixedBuffer(bufferSize);
 
       buffer.clear();
 

@@ -28,7 +28,8 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.api.core.ActiveMQException;
 import org.apache.activemq.artemis.api.core.ActiveMQExceptionType;
 import org.apache.activemq.artemis.api.core.Message;
@@ -1617,7 +1618,7 @@ public final class ClientSessionImpl implements ClientSessionInternal, FailureLi
     * @return
     */
    public static Object convert(Xid xid) {
-      ActiveMQBuffer buffer = ActiveMQBuffers.dynamicBuffer(200);
+      ActiveMQBuffer buffer = ActiveMQBufferFactory.dynamicBuffer(200);
       XidCodecSupport.encodeXid(xid, buffer);
 
       Object obj = XidCodecSupport.decodeXid(buffer);

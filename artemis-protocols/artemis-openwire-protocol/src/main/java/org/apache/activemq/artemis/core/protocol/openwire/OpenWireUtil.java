@@ -17,7 +17,8 @@
 package org.apache.activemq.artemis.core.protocol.openwire;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.core.server.ServerMessage;
 import org.apache.activemq.command.ActiveMQDestination;
 import org.apache.activemq.artemis.core.protocol.openwire.amq.AMQServerSession;
@@ -32,7 +33,7 @@ import org.apache.activemq.artemis.api.core.SimpleString;
 public class OpenWireUtil {
 
    public static ActiveMQBuffer toActiveMQBuffer(ByteSequence bytes) {
-      ActiveMQBuffer buffer = ActiveMQBuffers.fixedBuffer(bytes.length);
+      ActiveMQBuffer buffer = ActiveMQBufferFactory.fixedBuffer(bytes.length);
 
       buffer.writeBytes(bytes.data, bytes.offset, bytes.length);
       return buffer;

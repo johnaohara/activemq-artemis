@@ -17,7 +17,8 @@
 package org.apache.activemq.artemis.tests.unit.core.client.impl;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.api.core.ActiveMQException;
 import org.apache.activemq.artemis.api.core.SimpleString;
 import org.apache.activemq.artemis.api.core.client.ClientMessage;
@@ -124,7 +125,7 @@ public class LargeMessageBufferTest extends ActiveMQTestBase {
    public void testGetBytesILChannelBufferII() throws Exception {
       LargeMessageControllerImpl buffer = create15BytesSample();
 
-      ActiveMQBuffer dstBuffer = ActiveMQBuffers.fixedBuffer(20);
+      ActiveMQBuffer dstBuffer = ActiveMQBufferFactory.fixedBuffer(20);
 
       dstBuffer.setIndex(0, 5);
 
@@ -200,7 +201,7 @@ public class LargeMessageBufferTest extends ActiveMQTestBase {
 
    @Test
    public void testReadData() throws Exception {
-      ActiveMQBuffer dynamic = ActiveMQBuffers.dynamicBuffer(1);
+      ActiveMQBuffer dynamic = ActiveMQBufferFactory.dynamicBuffer(1);
 
       String str1 = RandomUtil.randomString();
       String str2 = RandomUtil.randomString();
@@ -228,7 +229,7 @@ public class LargeMessageBufferTest extends ActiveMQTestBase {
    public void testReadDataOverCached() throws Exception {
       clearDataRecreateServerDirs();
 
-      ActiveMQBuffer dynamic = ActiveMQBuffers.dynamicBuffer(1);
+      ActiveMQBuffer dynamic = ActiveMQBufferFactory.dynamicBuffer(1);
 
       String str1 = RandomUtil.randomString();
       String str2 = RandomUtil.randomString();

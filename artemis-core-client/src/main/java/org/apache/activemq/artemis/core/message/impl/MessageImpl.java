@@ -23,7 +23,8 @@ import java.util.Set;
 
 import io.netty.buffer.ByteBuf;
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.api.core.ActiveMQException;
 import org.apache.activemq.artemis.api.core.ActiveMQPropertyConversionException;
 import org.apache.activemq.artemis.api.core.Message;
@@ -915,7 +916,7 @@ public abstract class MessageImpl implements MessageInternal {
    }
 
    public void createBody(final int initialMessageBufferSize,final boolean wantPooled) {
-      buffer = wantPooled ? ActiveMQBuffers.andyDynamicBuffer(initialMessageBufferSize) : ActiveMQBuffers.dynamicBuffer(initialMessageBufferSize);
+      buffer = wantPooled ? ActiveMQBufferFactory.andyDynamicBuffer(initialMessageBufferSize) : ActiveMQBufferFactory.dynamicBuffer(initialMessageBufferSize);
 
       // There's a bug in netty which means a dynamic buffer won't resize until you write a byte
       buffer.writeByte((byte) 0);
@@ -955,7 +956,7 @@ public abstract class MessageImpl implements MessageInternal {
       }
 
       public int encode(final ByteBuffer bufferRead) throws ActiveMQException {
-         ActiveMQBuffer buffer = ActiveMQBuffers.wrappedBuffer(bufferRead);
+         ActiveMQBuffer buffer = ActiveMQBufferFactory.wrappedBuffer(bufferRead);
          return encode(buffer, bufferRead.capacity());
       }
 

@@ -19,7 +19,8 @@ package org.apache.activemq.artemis.core.paging.impl;
 import java.util.Arrays;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.core.paging.PagedMessage;
 import org.apache.activemq.artemis.core.persistence.StorageManager;
 import org.apache.activemq.artemis.core.server.LargeServerMessage;
@@ -64,7 +65,7 @@ public class PagedMessageImpl implements PagedMessage {
    public void initMessage(StorageManager storage) {
       if (largeMessageLazyData != null) {
          LargeServerMessage lgMessage = storage.createLargeMessage();
-         ActiveMQBuffer buffer = ActiveMQBuffers.dynamicBuffer(largeMessageLazyData);
+         ActiveMQBuffer buffer = ActiveMQBufferFactory.dynamicBuffer(largeMessageLazyData);
          lgMessage.decodeHeadersAndProperties(buffer);
          lgMessage.incrementDelayDeletionCount();
          lgMessage.setPaged();

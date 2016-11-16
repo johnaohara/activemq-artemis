@@ -25,7 +25,7 @@ import org.apache.activemq.artemis.core.buffers.impl.ChannelBufferWrapper;
 /**
  * Factory class to create instances of {@link ActiveMQBuffer}.
  */
-public final class ActiveMQBuffers {
+public final class UnpooledActiveMQBuffers implements ActiveMQBufferBuilder{
 
 
    private static final PooledByteBufAllocator ALLOCATOR = new PooledByteBufAllocator();
@@ -35,11 +35,11 @@ public final class ActiveMQBuffers {
     * @param size the initial size of the created ActiveMQBuffer
     * @return a self-expanding ActiveMQBuffer starting with the given size
     */
-   public static ActiveMQBuffer dynamicBuffer(final int size) {
+   public ActiveMQBuffer dynamicBuffer(final int size) {
       return new ChannelBufferWrapper(Unpooled.buffer(size));
    }
 
-   public static ActiveMQBuffer andyDynamicBuffer(final int size) {
+   public ActiveMQBuffer andyDynamicBuffer(final int size) {
       return new ChannelBufferWrapper(ALLOCATOR.buffer(size),true);
    }
 
@@ -49,7 +49,7 @@ public final class ActiveMQBuffers {
     * @param bytes the created buffer will be initially filled with this byte array
     * @return a self-expanding ActiveMQBuffer filled with the given byte array
     */
-   public static ActiveMQBuffer dynamicBuffer(final byte[] bytes) {
+   public ActiveMQBuffer dynamicBuffer(final byte[] bytes) {
       ActiveMQBuffer buff = dynamicBuffer(bytes.length);
 
       buff.writeBytes(bytes);
@@ -65,7 +65,7 @@ public final class ActiveMQBuffers {
     * @param underlying the underlying NIO ByteBuffer
     * @return an ActiveMQBuffer wrapping the underlying NIO ByteBuffer
     */
-   public static ActiveMQBuffer wrappedBuffer(final ByteBuffer underlying) {
+   public ActiveMQBuffer wrappedBuffer(final ByteBuffer underlying) {
       ActiveMQBuffer buff = new ChannelBufferWrapper(Unpooled.wrappedBuffer(underlying));
 
       buff.clear();
@@ -79,7 +79,7 @@ public final class ActiveMQBuffers {
     * @param underlying the underlying byte array
     * @return an ActiveMQBuffer wrapping the underlying byte array
     */
-   public static ActiveMQBuffer wrappedBuffer(final byte[] underlying) {
+   public ActiveMQBuffer wrappedBuffer(final byte[] underlying) {
       return new ChannelBufferWrapper(Unpooled.wrappedBuffer(underlying));
    }
 
@@ -89,11 +89,8 @@ public final class ActiveMQBuffers {
     * @param size the size of the created ActiveMQBuffer
     * @return a fixed ActiveMQBuffer with the given size
     */
-   public static ActiveMQBuffer fixedBuffer(final int size) {
+   public ActiveMQBuffer fixedBuffer(final int size) {
       return new ChannelBufferWrapper(Unpooled.buffer(size, size));
    }
 
-   private ActiveMQBuffers() {
-      // Utility class
-   }
 }

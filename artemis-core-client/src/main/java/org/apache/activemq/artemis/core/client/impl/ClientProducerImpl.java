@@ -21,7 +21,8 @@ import java.io.InputStream;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.api.core.ActiveMQException;
 import org.apache.activemq.artemis.api.core.Message;
 import org.apache.activemq.artemis.api.core.SimpleString;
@@ -366,7 +367,7 @@ public class ClientProducerImpl implements ClientProducerInternal {
 
             final int chunkLength = Math.min((int) (bodySize - pos), minLargeMessageSize);
 
-            final ActiveMQBuffer bodyBuffer = ActiveMQBuffers.fixedBuffer(chunkLength);
+            final ActiveMQBuffer bodyBuffer = ActiveMQBufferFactory.fixedBuffer(chunkLength);
 
             context.encode(bodyBuffer, chunkLength);
 

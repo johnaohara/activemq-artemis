@@ -17,7 +17,8 @@
 package org.apache.activemq.artemis.tests.unit.core.remoting.impl.netty;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.tests.unit.core.remoting.ActiveMQBufferTestBase;
 
 /**
@@ -39,7 +40,7 @@ public class ChannelBufferWrapper2Test extends ActiveMQBufferTestBase {
 
    @Override
    protected ActiveMQBuffer createBuffer() {
-      return ActiveMQBuffers.dynamicBuffer(512);
+      return ActiveMQBufferFactory.dynamicBuffer(512);
    }
 
    // Package protected ---------------------------------------------

@@ -20,7 +20,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.tests.util.ActiveMQTestBase;
 import org.apache.activemq.artemis.core.journal.Journal;
 import org.apache.activemq.artemis.core.journal.PreparedTransactionInfo;
@@ -126,7 +127,7 @@ public class BatchIDGeneratorUnitTest extends ActiveMQTestBase {
 
       for (RecordInfo record : records) {
          if (record.userRecordType == JournalRecordIds.ID_COUNTER_RECORD) {
-            ActiveMQBuffer buffer = ActiveMQBuffers.wrappedBuffer(record.data);
+            ActiveMQBuffer buffer = ActiveMQBufferFactory.wrappedBuffer(record.data);
             batch.loadState(record.id, buffer);
          }
       }

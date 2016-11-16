@@ -91,6 +91,8 @@ public class ActiveMQSession implements QueueSession, TopicSession {
 
    private final Set<ActiveMQMessageConsumer> consumers = new HashSet<ActiveMQMessageConsumer>();
 
+   ArrayList<ActiveMQMessage> createdMessages = new ArrayList<>();
+
    // Constructors --------------------------------------------------
 
    protected ActiveMQSession(final ActiveMQConnection connection,
@@ -111,8 +113,6 @@ public class ActiveMQSession implements QueueSession, TopicSession {
 
       this.xa = xa;
    }
-
-   ArrayList<ActiveMQMessage> createdMessages = new ArrayList<>();
 
    // Session implementation ----------------------------------------
 

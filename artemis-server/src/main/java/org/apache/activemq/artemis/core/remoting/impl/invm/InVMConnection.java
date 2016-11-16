@@ -23,10 +23,10 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
 
-import io.netty.buffer.UnpooledHeapByteBuf;
 import io.netty.channel.ChannelFutureListener;
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.api.core.ActiveMQInterruptedException;
 import org.apache.activemq.artemis.api.core.TransportConfiguration;
 import org.apache.activemq.artemis.core.security.ActiveMQPrincipal;
@@ -139,7 +139,7 @@ public class InVMConnection implements Connection {
       if(buffer != null ){
          return buffer;
       }
-      return ActiveMQBuffers.dynamicBuffer(size);
+      return ActiveMQBufferFactory.dynamicBuffer(size);
    }
 
    public Object getID() {

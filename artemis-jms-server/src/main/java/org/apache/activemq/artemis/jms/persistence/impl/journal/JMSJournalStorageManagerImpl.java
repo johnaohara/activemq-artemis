@@ -23,7 +23,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.api.core.Pair;
 import org.apache.activemq.artemis.core.config.Configuration;
 import org.apache.activemq.artemis.core.journal.Journal;
@@ -245,7 +246,7 @@ public final class JMSJournalStorageManagerImpl implements JMSStorageManager {
       for (RecordInfo record : data) {
          long id = record.id;
 
-         ActiveMQBuffer buffer = ActiveMQBuffers.wrappedBuffer(record.data);
+         ActiveMQBuffer buffer = ActiveMQBufferFactory.wrappedBuffer(record.data);
 
          byte rec = record.getUserRecordType();
 

@@ -17,7 +17,8 @@
 package org.apache.activemq.artemis.tests.integration.persistence;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class TransportConfigurationEncodingSupportTest extends Assert {
       params.put(TransportConstants.HOST_PROP_NAME, RandomUtil.randomString());
       TransportConfiguration config = new TransportConfiguration(NettyConnectorFactory.class.getName(), params);
 
-      ActiveMQBuffer buffer = ActiveMQBuffers.fixedBuffer(TransportConfigurationEncodingSupport.getEncodeSize(config));
+      ActiveMQBuffer buffer = ActiveMQBufferFactory.fixedBuffer(TransportConfigurationEncodingSupport.getEncodeSize(config));
       TransportConfigurationEncodingSupport.encode(buffer, config);
 
       assertEquals(buffer.capacity(), buffer.writerIndex());
@@ -86,7 +87,7 @@ public class TransportConfigurationEncodingSupportTest extends Assert {
       connectorConfigs.add(new Pair<TransportConfiguration, TransportConfiguration>(live1, backup1));
       connectorConfigs.add(new Pair<TransportConfiguration, TransportConfiguration>(live2, null));
 
-      ActiveMQBuffer buffer = ActiveMQBuffers.fixedBuffer(TransportConfigurationEncodingSupport.getEncodeSize(connectorConfigs));
+      ActiveMQBuffer buffer = ActiveMQBufferFactory.fixedBuffer(TransportConfigurationEncodingSupport.getEncodeSize(connectorConfigs));
       TransportConfigurationEncodingSupport.encodeConfigs(buffer, connectorConfigs);
 
       assertEquals(buffer.capacity(), buffer.writerIndex());

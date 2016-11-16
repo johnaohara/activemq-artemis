@@ -24,7 +24,8 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.embedded.EmbeddedChannel;
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.api.core.ActiveMQException;
 import org.apache.activemq.artemis.tests.util.ActiveMQTestBase;
 import org.apache.activemq.artemis.core.remoting.impl.netty.NettyConnection;
@@ -48,7 +49,7 @@ public class NettyConnectionTest extends ActiveMQTestBase {
 
    @Test
    public void testWrite() throws Exception {
-      ActiveMQBuffer buff = ActiveMQBuffers.wrappedBuffer(ByteBuffer.allocate(128));
+      ActiveMQBuffer buff = ActiveMQBufferFactory.wrappedBuffer(ByteBuffer.allocate(128));
       EmbeddedChannel channel = createChannel();
 
       Assert.assertEquals(0, channel.outboundMessages().size());

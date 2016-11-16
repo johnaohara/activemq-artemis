@@ -24,7 +24,8 @@ import java.util.concurrent.RejectedExecutionException;
 
 import io.netty.channel.ChannelPipeline;
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.api.core.BaseInterceptor;
 import org.apache.activemq.artemis.api.core.Interceptor;
 import org.apache.activemq.artemis.api.core.Pair;
@@ -167,7 +168,7 @@ public class CoreProtocolManager implements ProtocolManager<Interceptor> {
 
    @Override
    public boolean isProtocol(byte[] array) {
-      return isArtemis(ActiveMQBuffers.wrappedBuffer(array));
+      return isArtemis( ActiveMQBufferFactory.wrappedBuffer(array));
    }
 
    @Override

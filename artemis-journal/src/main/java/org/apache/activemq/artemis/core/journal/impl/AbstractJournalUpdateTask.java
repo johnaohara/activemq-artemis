@@ -22,7 +22,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.api.core.Pair;
 import org.apache.activemq.artemis.core.io.SequentialFile;
 import org.apache.activemq.artemis.core.io.SequentialFileFactory;
@@ -90,7 +91,7 @@ public abstract class AbstractJournalUpdateTask implements JournalReaderCallback
 
          JournalImpl.initFileHeader(fileFactory, controlFile, 0, 0);
 
-         ActiveMQBuffer filesToRename = ActiveMQBuffers.dynamicBuffer(1);
+         ActiveMQBuffer filesToRename = ActiveMQBufferFactory.dynamicBuffer(1);
 
          // DataFiles first
 
@@ -132,7 +133,7 @@ public abstract class AbstractJournalUpdateTask implements JournalReaderCallback
 
          JournalInternalRecord controlRecord = new JournalAddRecord(true, 1, (byte) 0, new ByteArrayEncoding(filesToRename.toByteBuffer().array()));
 
-         ActiveMQBuffer renameBuffer = ActiveMQBuffers.dynamicBuffer(filesToRename.writerIndex());
+         ActiveMQBuffer renameBuffer = ActiveMQBufferFactory.dynamicBuffer(filesToRename.writerIndex());
 
          controlRecord.setFileID(0);
 
@@ -188,7 +189,7 @@ public abstract class AbstractJournalUpdateTask implements JournalReaderCallback
 
       ByteBuffer bufferWrite = fileFactory.newBuffer(journal.getFileSize());
 
-      writingChannel = ActiveMQBuffers.wrappedBuffer(bufferWrite);
+      writingChannel = ActiveMQBufferFactory.wrappedBuffer(bufferWrite);
 
       currentFile = filesRepository.takeFile(false, false, false, true);
 

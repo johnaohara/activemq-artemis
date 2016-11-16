@@ -24,7 +24,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.core.io.IOCallback;
 import org.apache.activemq.artemis.core.io.buffer.TimedBuffer;
 import org.apache.activemq.artemis.core.io.buffer.TimedBufferObserver;
@@ -93,7 +94,7 @@ public class TimedBufferTest extends ActiveMQTestBase {
                bytes[j] = ActiveMQTestBase.getSamplebyte(x++);
             }
 
-            ActiveMQBuffer buff = ActiveMQBuffers.wrappedBuffer(bytes);
+            ActiveMQBuffer buff = ActiveMQBufferFactory.wrappedBuffer(bytes);
 
             timedBuffer.checkSize(10);
             timedBuffer.addBytes(buff, false, dummyCallback);
@@ -159,7 +160,7 @@ public class TimedBufferTest extends ActiveMQTestBase {
             bytes[j] = ActiveMQTestBase.getSamplebyte(x++);
          }
 
-         ActiveMQBuffer buff = ActiveMQBuffers.wrappedBuffer(bytes);
+         ActiveMQBuffer buff = ActiveMQBufferFactory.wrappedBuffer(bytes);
 
          timedBuffer.checkSize(10);
          timedBuffer.addBytes(buff, false, dummyCallback);
@@ -173,7 +174,7 @@ public class TimedBufferTest extends ActiveMQTestBase {
             bytes[j] = ActiveMQTestBase.getSamplebyte(x++);
          }
 
-         buff = ActiveMQBuffers.wrappedBuffer(bytes);
+         buff = ActiveMQBufferFactory.wrappedBuffer(bytes);
 
          timedBuffer.checkSize(10);
          timedBuffer.addBytes(buff, true, dummyCallback);
@@ -260,7 +261,7 @@ public class TimedBufferTest extends ActiveMQTestBase {
             bytes[j] = ActiveMQTestBase.getSamplebyte(x++);
          }
 
-         ActiveMQBuffer buff = ActiveMQBuffers.wrappedBuffer(bytes);
+         ActiveMQBuffer buff = ActiveMQBufferFactory.wrappedBuffer(bytes);
 
          timedBuffer.checkSize(10);
          timedBuffer.addBytes(buff, true, dummyCallback);
@@ -336,7 +337,7 @@ public class TimedBufferTest extends ActiveMQTestBase {
             bytes[j] = ActiveMQTestBase.getSamplebyte(x++);
          }
 
-         ActiveMQBuffer buff = ActiveMQBuffers.wrappedBuffer(bytes);
+         ActiveMQBuffer buff = ActiveMQBufferFactory.wrappedBuffer(bytes);
 
          timedBuffer.checkSize(10);
          timedBuffer.addBytes(buff, true, dummyCallback);

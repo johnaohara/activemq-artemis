@@ -25,7 +25,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.api.core.ActiveMQExceptionType;
 import org.apache.activemq.artemis.core.io.IOCallback;
 import org.apache.activemq.artemis.core.journal.EncodingSupport;
@@ -517,7 +518,7 @@ public class FakeSequentialFileFactory implements SequentialFileFactory {
        */
       public void write(final EncodingSupport bytes, final boolean sync, final IOCallback callback) throws Exception {
          ByteBuffer buffer = newBuffer(bytes.getEncodeSize());
-         ActiveMQBuffer outbuffer = ActiveMQBuffers.wrappedBuffer(buffer);
+         ActiveMQBuffer outbuffer = ActiveMQBufferFactory.wrappedBuffer(buffer);
          bytes.encode(outbuffer);
          write(outbuffer, sync, callback);
       }
@@ -527,7 +528,7 @@ public class FakeSequentialFileFactory implements SequentialFileFactory {
        */
       public void write(final EncodingSupport bytes, final boolean sync) throws Exception {
          ByteBuffer buffer = newBuffer(bytes.getEncodeSize());
-         ActiveMQBuffer outbuffer = ActiveMQBuffers.wrappedBuffer(buffer);
+         ActiveMQBuffer outbuffer = ActiveMQBufferFactory.wrappedBuffer(buffer);
          bytes.encode(outbuffer);
          write(outbuffer, sync);
       }

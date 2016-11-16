@@ -25,7 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.api.core.Message;
 import org.apache.activemq.artemis.core.config.impl.ConfigurationImpl;
 import org.apache.activemq.artemis.core.journal.EncodingSupport;
@@ -417,7 +418,7 @@ public final class DescribeJournal {
 
    private static Xid toXid(final byte[] data) {
       try {
-         return XidCodecSupport.decodeXid(ActiveMQBuffers.wrappedBuffer(data));
+         return XidCodecSupport.decodeXid( ActiveMQBufferFactory.wrappedBuffer(data));
       }
       catch (Exception e) {
          return null;
@@ -429,7 +430,7 @@ public final class DescribeJournal {
    }
 
    public static Object newObjectEncoding(RecordInfo info, JournalStorageManager storageManager) {
-      ActiveMQBuffer buffer = ActiveMQBuffers.wrappedBuffer(info.data);
+      ActiveMQBuffer buffer = ActiveMQBufferFactory.wrappedBuffer(info.data);
       long id = info.id;
       int rec = info.getUserRecordType();
 

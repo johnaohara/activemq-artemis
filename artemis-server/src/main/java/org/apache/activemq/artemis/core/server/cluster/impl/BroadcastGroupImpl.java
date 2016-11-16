@@ -23,7 +23,8 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.api.core.BroadcastEndpoint;
 import org.apache.activemq.artemis.api.core.BroadcastEndpointFactory;
 import org.apache.activemq.artemis.api.core.SimpleString;
@@ -170,7 +171,7 @@ public class BroadcastGroupImpl implements BroadcastGroup, Runnable {
    }
 
    public synchronized void broadcastConnectors() throws Exception {
-      ActiveMQBuffer buff = ActiveMQBuffers.dynamicBuffer(4096);
+      ActiveMQBuffer buff = ActiveMQBufferFactory.dynamicBuffer(4096);
 
       buff.writeString(nodeManager.getNodeId().toString());
 

@@ -24,7 +24,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.api.core.ActiveMQInterruptedException;
 import org.apache.activemq.artemis.api.core.BroadcastEndpoint;
 import org.apache.activemq.artemis.api.core.BroadcastEndpointFactory;
@@ -271,7 +272,7 @@ public final class DiscoveryGroup implements ActiveMQComponent {
                   }
                }
 
-               ActiveMQBuffer buffer = ActiveMQBuffers.wrappedBuffer(data);
+               ActiveMQBuffer buffer = ActiveMQBufferFactory.wrappedBuffer(data);
 
                String originatingNodeID = buffer.readString();
 

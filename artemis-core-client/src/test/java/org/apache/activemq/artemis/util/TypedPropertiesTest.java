@@ -19,7 +19,8 @@ package org.apache.activemq.artemis.util;
 import java.util.Iterator;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.api.core.SimpleString;
 import org.apache.activemq.artemis.tests.util.RandomUtil;
 import org.apache.activemq.artemis.utils.TypedProperties;
@@ -189,7 +190,7 @@ public class TypedPropertiesTest {
       SimpleString keyToRemove = RandomUtil.randomSimpleString();
       props.putSimpleStringProperty(keyToRemove, RandomUtil.randomSimpleString());
 
-      ActiveMQBuffer buffer = ActiveMQBuffers.dynamicBuffer(1024);
+      ActiveMQBuffer buffer = ActiveMQBufferFactory.dynamicBuffer(1024);
       props.encode(buffer);
 
       Assert.assertEquals(props.getEncodeSize(), buffer.writerIndex());
@@ -212,7 +213,7 @@ public class TypedPropertiesTest {
    public void testEncodeDecodeEmpty() throws Exception {
       TypedProperties emptyProps = new TypedProperties();
 
-      ActiveMQBuffer buffer = ActiveMQBuffers.dynamicBuffer(1024);
+      ActiveMQBuffer buffer = ActiveMQBufferFactory.dynamicBuffer(1024);
       emptyProps.encode(buffer);
 
       Assert.assertEquals(props.getEncodeSize(), buffer.writerIndex());

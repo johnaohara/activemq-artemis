@@ -20,7 +20,8 @@ package org.apache.activemq.artemis.utils;
 import java.util.Random;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.api.core.SimpleString;
 
 public class RandomUtil {
@@ -61,7 +62,7 @@ public class RandomUtil {
    }
 
    public static ActiveMQBuffer randomBuffer(final int size, final long... data) {
-      ActiveMQBuffer buffer = ActiveMQBuffers.fixedBuffer(size + 8 * data.length);
+      ActiveMQBuffer buffer = ActiveMQBufferFactory.fixedBuffer(size + 8 * data.length);
 
       for (long d : data) {
          buffer.writeLong(d);

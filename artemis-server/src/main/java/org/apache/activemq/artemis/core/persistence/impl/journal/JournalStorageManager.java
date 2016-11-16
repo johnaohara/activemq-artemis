@@ -47,7 +47,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.api.core.ActiveMQException;
 import org.apache.activemq.artemis.api.core.ActiveMQIllegalStateException;
 import org.apache.activemq.artemis.api.core.ActiveMQInternalErrorException;
@@ -1278,7 +1279,7 @@ public class JournalStorageManager implements StorageManager {
             RecordInfo record = records.get(reccount);
             byte[] data = record.data;
 
-            ActiveMQBuffer buff = ActiveMQBuffers.wrappedBuffer(data);
+            ActiveMQBuffer buff = ActiveMQBufferFactory.wrappedBuffer(data);
 
             byte recordType = record.getUserRecordType();
 
@@ -1767,7 +1768,7 @@ public class JournalStorageManager implements StorageManager {
       for (RecordInfo record : records) {
          long id = record.id;
 
-         ActiveMQBuffer buffer = ActiveMQBuffers.wrappedBuffer(record.data);
+         ActiveMQBuffer buffer = ActiveMQBufferFactory.wrappedBuffer(record.data);
 
          byte rec = record.getUserRecordType();
 
@@ -2126,7 +2127,7 @@ public class JournalStorageManager implements StorageManager {
          for (RecordInfo record : preparedTransaction.records) {
             byte[] data = record.data;
 
-            ActiveMQBuffer buff = ActiveMQBuffers.wrappedBuffer(data);
+            ActiveMQBuffer buff = ActiveMQBufferFactory.wrappedBuffer(data);
 
             byte recordType = record.getUserRecordType();
 
@@ -2265,7 +2266,7 @@ public class JournalStorageManager implements StorageManager {
             byte[] data = recordDeleted.data;
 
             if (data.length > 0) {
-               ActiveMQBuffer buff = ActiveMQBuffers.wrappedBuffer(data);
+               ActiveMQBuffer buff = ActiveMQBufferFactory.wrappedBuffer(data);
                byte b = buff.readByte();
 
                switch (b) {
@@ -2365,7 +2366,7 @@ public class JournalStorageManager implements StorageManager {
       }
 
       XidEncoding(final byte[] data) {
-         xid = XidCodecSupport.decodeXid(ActiveMQBuffers.wrappedBuffer(data));
+         xid = XidCodecSupport.decodeXid( ActiveMQBufferFactory.wrappedBuffer(data));
       }
 
       public void decode(final ActiveMQBuffer buffer) {
@@ -3147,7 +3148,7 @@ public class JournalStorageManager implements StorageManager {
             if (record.userRecordType == ADD_LARGE_MESSAGE) {
                byte[] data = record.data;
 
-               ActiveMQBuffer buff = ActiveMQBuffers.wrappedBuffer(data);
+               ActiveMQBuffer buff = ActiveMQBufferFactory.wrappedBuffer(data);
 
                try {
                   LargeServerMessage serverMessage = parseLargeMessage(messages, buff);

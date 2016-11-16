@@ -17,7 +17,8 @@
 package org.apache.activemq.artemis.tests.integration.persistence;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.api.core.Pair;
 import org.apache.activemq.artemis.core.remoting.impl.netty.TransportConstants;
 import org.apache.activemq.artemis.jms.persistence.config.PersistedConnectionFactory;
@@ -98,7 +99,7 @@ public class JMSConnectionFactoryConfigurationStorageTest extends StorageManager
 
       int size = config.getEncodeSize();
 
-      ActiveMQBuffer buffer = ActiveMQBuffers.fixedBuffer(size);
+      ActiveMQBuffer buffer = ActiveMQBufferFactory.fixedBuffer(size);
 
       config.encode(buffer);
 
@@ -108,7 +109,7 @@ public class JMSConnectionFactoryConfigurationStorageTest extends StorageManager
 
       size = persistedCF.getEncodeSize();
 
-      buffer = ActiveMQBuffers.fixedBuffer(size);
+      buffer = ActiveMQBufferFactory.fixedBuffer(size);
 
       persistedCF.encode(buffer);
 

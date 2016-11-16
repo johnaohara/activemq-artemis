@@ -22,7 +22,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 
 /**
  * Represents all the data in a STOMP frame.
@@ -91,10 +92,10 @@ public class StompFrame {
    public ActiveMQBuffer toActiveMQBuffer() throws Exception {
       if (buffer == null) {
          if (bytesBody != null) {
-            buffer = ActiveMQBuffers.dynamicBuffer(bytesBody.length + 512);
+            buffer = ActiveMQBufferFactory.dynamicBuffer(bytesBody.length + 512);
          }
          else {
-            buffer = ActiveMQBuffers.dynamicBuffer(512);
+            buffer = ActiveMQBufferFactory.dynamicBuffer(512);
          }
 
          if (isPing()) {

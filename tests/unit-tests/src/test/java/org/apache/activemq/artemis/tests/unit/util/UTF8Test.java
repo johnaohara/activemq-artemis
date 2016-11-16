@@ -17,7 +17,8 @@
 package org.apache.activemq.artemis.tests.unit.util;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.tests.util.ActiveMQTestBase;
 import org.junit.After;
 
@@ -40,7 +41,7 @@ public class UTF8Test extends ActiveMQTestBase {
 
    @Test
    public void testValidateUTF() throws Exception {
-      ActiveMQBuffer buffer = ActiveMQBuffers.fixedBuffer(60 * 1024);
+      ActiveMQBuffer buffer = ActiveMQBufferFactory.fixedBuffer(60 * 1024);
 
       byte[] bytes = new byte[20000];
 
@@ -69,11 +70,11 @@ public class UTF8Test extends ActiveMQTestBase {
          String str = new String(bytes);
 
          // The maximum size the encoded UTF string would reach is str.length * 3 (look at the UTF8 implementation)
-         testValidateUTFOnDataInputStream(str, ActiveMQBuffers.wrappedBuffer(ByteBuffer.allocate(str.length() * 3 + DataConstants.SIZE_SHORT)));
+         testValidateUTFOnDataInputStream(str, ActiveMQBufferFactory.wrappedBuffer(ByteBuffer.allocate(str.length() * 3 + DataConstants.SIZE_SHORT)));
 
-         testValidateUTFOnDataInputStream(str, ActiveMQBuffers.dynamicBuffer(100));
+         testValidateUTFOnDataInputStream(str, ActiveMQBufferFactory.dynamicBuffer(100));
 
-         testValidateUTFOnDataInputStream(str, ActiveMQBuffers.fixedBuffer(100 * 1024));
+         testValidateUTFOnDataInputStream(str, ActiveMQBufferFactory.fixedBuffer(100 * 1024));
       }
    }
 
@@ -91,7 +92,7 @@ public class UTF8Test extends ActiveMQTestBase {
 
       outData.writeUTF(str);
 
-      ActiveMQBuffer buffer = ActiveMQBuffers.wrappedBuffer(byteOut.toByteArray());
+      ActiveMQBuffer buffer = ActiveMQBufferFactory.wrappedBuffer(byteOut.toByteArray());
 
       newStr = UTF8Util.readUTF(buffer);
 
@@ -109,7 +110,7 @@ public class UTF8Test extends ActiveMQTestBase {
 
       String str = new String(chars);
 
-      ActiveMQBuffer buffer = ActiveMQBuffers.fixedBuffer(0xffff + 4);
+      ActiveMQBuffer buffer = ActiveMQBufferFactory.fixedBuffer(0xffff + 4);
 
       try {
          UTF8Util.saveUTF(buffer, str);

@@ -27,7 +27,8 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.api.core.ActiveMQException;
 import org.apache.activemq.artemis.api.core.ActiveMQIllegalStateException;
 import org.apache.activemq.artemis.api.core.SimpleString;
@@ -1012,7 +1013,7 @@ public class ServerConsumerImpl implements ServerConsumer, ReadyListener {
 
                localChunkLen = (int) Math.min(sizePendingLargeMessage - positionPendingLargeMessage, minLargeMessageSize);
 
-               ActiveMQBuffer bodyBuffer = ActiveMQBuffers.fixedBuffer(localChunkLen);
+               ActiveMQBuffer bodyBuffer = ActiveMQBufferFactory.fixedBuffer(localChunkLen);
 
                context.encode(bodyBuffer, localChunkLen);
 

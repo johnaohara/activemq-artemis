@@ -25,7 +25,8 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.api.core.Pair;
 import org.apache.activemq.artemis.core.journal.RecordInfo;
 import org.apache.activemq.artemis.core.io.SequentialFile;
@@ -83,7 +84,7 @@ public class JournalCompactor extends AbstractJournalUpdateTask implements Journ
             return null;
          }
          else {
-            ActiveMQBuffer input = ActiveMQBuffers.wrappedBuffer(records.get(0).data);
+            ActiveMQBuffer input = ActiveMQBufferFactory.wrappedBuffer(records.get(0).data);
 
             int numberDataFiles = input.readInt();
 

@@ -26,7 +26,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.api.core.ActiveMQException;
 import org.apache.activemq.artemis.api.core.ActiveMQIOErrorException;
 import org.apache.activemq.artemis.core.journal.EncodingSupport;
@@ -237,7 +238,7 @@ public abstract class AbstractSequentialFile implements SequentialFile {
          // Because AIO will need a specific Buffer
          // And NIO will also need a whole buffer to perform the write
 
-         ActiveMQBuffer outBuffer = ActiveMQBuffers.wrappedBuffer(buffer);
+         ActiveMQBuffer outBuffer = ActiveMQBufferFactory.wrappedBuffer(buffer);
          bytes.encode(outBuffer);
          buffer.rewind();
          writeDirect(buffer, sync, callback);

@@ -23,7 +23,8 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.api.core.SimpleString;
 import org.apache.activemq.artemis.core.io.SequentialFile;
 import org.apache.activemq.artemis.core.io.SequentialFileFactory;
@@ -119,7 +120,7 @@ public final class Page implements Comparable<Page> {
 
          directBuffer.rewind();
 
-         fileBuffer = ActiveMQBuffers.wrappedBuffer(directBuffer);
+         fileBuffer = ActiveMQBufferFactory.wrappedBuffer(directBuffer);
          fileBuffer.writerIndex(fileBuffer.capacity());
 
          while (fileBuffer.readable()) {
@@ -179,7 +180,7 @@ public final class Page implements Comparable<Page> {
 
       ByteBuffer buffer = fileFactory.newBuffer(message.getEncodeSize() + Page.SIZE_RECORD);
 
-      ActiveMQBuffer wrap = ActiveMQBuffers.wrappedBuffer(buffer);
+      ActiveMQBuffer wrap = ActiveMQBufferFactory.wrappedBuffer(buffer);
       wrap.clear();
 
       wrap.writeByte(Page.START_BYTE);

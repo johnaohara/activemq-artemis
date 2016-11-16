@@ -39,7 +39,8 @@ import java.util.concurrent.ScheduledExecutorService;
 
 import io.airlift.airline.Command;
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.api.core.ActiveMQException;
 import org.apache.activemq.artemis.api.core.Message;
 import org.apache.activemq.artemis.api.core.Pair;
@@ -230,7 +231,7 @@ public final class XmlDataExporter extends LockAbstract {
       for (RecordInfo info : records) {
          byte[] data = info.data;
 
-         ActiveMQBuffer buff = ActiveMQBuffers.wrappedBuffer(data);
+         ActiveMQBuffer buff = ActiveMQBufferFactory.wrappedBuffer(data);
 
          Object o = DescribeJournal.newObjectEncoding(info, storageManager);
          if (info.getUserRecordType() == JournalRecordIds.ADD_MESSAGE) {
@@ -325,7 +326,7 @@ public final class XmlDataExporter extends LockAbstract {
       for (RecordInfo record : data) {
          long id = record.id;
 
-         ActiveMQBuffer buffer = ActiveMQBuffers.wrappedBuffer(record.data);
+         ActiveMQBuffer buffer = ActiveMQBufferFactory.wrappedBuffer(record.data);
 
          byte rec = record.getUserRecordType();
 
@@ -799,7 +800,7 @@ public final class XmlDataExporter extends LockAbstract {
             else {
                bufferSize = remainder;
             }
-            ActiveMQBuffer buffer = ActiveMQBuffers.fixedBuffer(bufferSize.intValue());
+            ActiveMQBuffer buffer = ActiveMQBufferFactory.fixedBuffer(bufferSize.intValue());
             encoder.encode(buffer, bufferSize.intValue());
             xmlWriter.writeCData(encode(buffer.toByteBuffer().array()));
             totalBytesWritten += bufferSize;

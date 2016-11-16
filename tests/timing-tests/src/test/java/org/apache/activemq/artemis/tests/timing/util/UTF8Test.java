@@ -17,7 +17,8 @@
 package org.apache.activemq.artemis.tests.timing.util;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.junit.After;
 
 import org.junit.Test;
@@ -37,7 +38,7 @@ public class UTF8Test extends ActiveMQTestBase {
 
    @Test
    public void testWriteUTF() throws Exception {
-      ActiveMQBuffer buffer = ActiveMQBuffers.fixedBuffer(10 * 1024);
+      ActiveMQBuffer buffer = ActiveMQBufferFactory.fixedBuffer(10 * 1024);
 
       long start = System.currentTimeMillis();
 
@@ -59,7 +60,7 @@ public class UTF8Test extends ActiveMQTestBase {
 
    @Test
    public void testReadUTF() throws Exception {
-      ActiveMQBuffer buffer = ActiveMQBuffers.fixedBuffer(10 * 1024);
+      ActiveMQBuffer buffer = ActiveMQBufferFactory.fixedBuffer(10 * 1024);
 
       buffer.writeUTF(str);
 

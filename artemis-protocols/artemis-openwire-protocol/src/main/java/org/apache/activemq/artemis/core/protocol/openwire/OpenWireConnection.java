@@ -34,7 +34,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.api.core.ActiveMQException;
 import org.apache.activemq.artemis.api.core.ActiveMQNonExistentQueueException;
 import org.apache.activemq.artemis.api.core.ActiveMQSecurityException;
@@ -384,7 +385,7 @@ public class OpenWireConnection implements RemotingConnection, CommandVisitor, S
 
    @Override
    public ActiveMQBuffer createTransportBuffer(int size, ActiveMQBuffer buffer) {
-      return ActiveMQBuffers.dynamicBuffer(size);
+      return ActiveMQBufferFactory.dynamicBuffer(size);
    }
 
    @Override

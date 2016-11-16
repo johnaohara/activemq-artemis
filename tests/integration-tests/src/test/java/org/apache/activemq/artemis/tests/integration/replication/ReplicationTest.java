@@ -31,7 +31,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
-import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
+import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
+import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.api.core.ActiveMQException;
 import org.apache.activemq.artemis.api.core.ActiveMQExceptionType;
 import org.apache.activemq.artemis.api.core.ActiveMQNotConnectedException;
@@ -267,7 +268,7 @@ public final class ReplicationTest extends ActiveMQTestBase {
       serverMsg.setMessageID(500);
       serverMsg.setAddress(new SimpleString("tttt"));
 
-      ActiveMQBuffer buffer = ActiveMQBuffers.dynamicBuffer(100);
+      ActiveMQBuffer buffer = ActiveMQBufferFactory.dynamicBuffer(100);
       serverMsg.encodeHeadersAndProperties(buffer);
 
       manager.largeMessageBegin(500);
