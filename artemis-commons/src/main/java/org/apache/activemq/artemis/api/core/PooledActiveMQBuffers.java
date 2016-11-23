@@ -36,7 +36,7 @@ public final class PooledActiveMQBuffers implements ActiveMQBufferBuilder{
     * @return a self-expanding ActiveMQBuffer starting with the given size
     */
    public ActiveMQBuffer dynamicBuffer(final int size) {
-      return new ChannelBufferWrapper(Unpooled.buffer(size));
+      return new ChannelBufferWrapper(ALLOCATOR.buffer(size));
    }
 
    public ActiveMQBuffer andyDynamicBuffer(final int size) {
