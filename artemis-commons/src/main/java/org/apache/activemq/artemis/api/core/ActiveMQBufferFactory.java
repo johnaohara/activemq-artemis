@@ -34,7 +34,7 @@ public class ActiveMQBufferFactory {
 	}
 
 	public static ActiveMQBuffer andyDynamicBuffer(final int size) {
-		return activeMQBufferBuilder.andyDynamicBuffer( size );
+		return activeMQBufferBuilder.dynamicBuffer( size );
 	}
 
 	/**

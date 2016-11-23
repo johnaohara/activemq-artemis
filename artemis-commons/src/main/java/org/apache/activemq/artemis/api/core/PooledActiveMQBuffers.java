@@ -39,10 +39,6 @@ public final class PooledActiveMQBuffers implements ActiveMQBufferBuilder{
       return new ChannelBufferWrapper(ALLOCATOR.buffer(size));
    }
 
-   public ActiveMQBuffer andyDynamicBuffer(final int size) {
-      return new ChannelBufferWrapper(ALLOCATOR.buffer(size),true);
-   }
-
    /**
     * Creates a <em>self-expanding</em> ActiveMQBuffer filled with the given byte array
     *

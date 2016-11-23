@@ -28,7 +28,6 @@ import org.apache.activemq.artemis.core.buffers.impl.ChannelBufferWrapper;
 public final class UnpooledActiveMQBuffers implements ActiveMQBufferBuilder{
 
 
-   private static final PooledByteBufAllocator ALLOCATOR = new PooledByteBufAllocator();
    /**
     * Creates a <em>self-expanding</em> ActiveMQBuffer with the given initial size
     *
@@ -37,10 +36,6 @@ public final class UnpooledActiveMQBuffers implements ActiveMQBufferBuilder{
     */
    public ActiveMQBuffer dynamicBuffer(final int size) {
       return new ChannelBufferWrapper(Unpooled.buffer(size));
-   }
-
-   public ActiveMQBuffer andyDynamicBuffer(final int size) {
-      return new ChannelBufferWrapper(ALLOCATOR.buffer(size),true);
    }
 
    /**

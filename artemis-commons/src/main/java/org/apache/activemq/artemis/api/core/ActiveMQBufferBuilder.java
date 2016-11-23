@@ -12,7 +12,6 @@ public interface ActiveMQBufferBuilder {
 
 	ActiveMQBuffer dynamicBuffer(final int size);
 
-	ActiveMQBuffer andyDynamicBuffer(final int size) ;
 
 	/**
 	 * Creates a <em>self-expanding</em> ActiveMQBuffer filled with the given byte array
