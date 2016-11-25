@@ -43,12 +43,12 @@ public class ChannelBufferWrapper implements ActiveMQBuffer {
    }
 
    public ChannelBufferWrapper(final ByteBuf buffer) {
-      this(buffer, false);
+      this( buffer, false );
    }
 
    public ChannelBufferWrapper(final ByteBuf buffer, boolean releasable) {
-      if (!releasable) {
-         this.buffer = Unpooled.unreleasableBuffer(buffer);
+      if ( !releasable ) {
+         this.buffer = Unpooled.unreleasableBuffer( buffer );
       }
       else {
          this.buffer = buffer;
@@ -62,7 +62,7 @@ public class ChannelBufferWrapper implements ActiveMQBuffer {
 
    public SimpleString readNullableSimpleString() {
       int b = buffer.readByte();
-      if (b == DataConstants.NULL) {
+      if ( b == DataConstants.NULL ) {
          return null;
       }
       return readSimpleStringInternal();
@@ -70,7 +70,7 @@ public class ChannelBufferWrapper implements ActiveMQBuffer {
 
    public String readNullableString() {
       int b = buffer.readByte();
-      if (b == DataConstants.NULL) {
+      if ( b == DataConstants.NULL ) {
          return null;
       }
       return readStringInternal();
@@ -83,8 +83,8 @@ public class ChannelBufferWrapper implements ActiveMQBuffer {
    private SimpleString readSimpleStringInternal() {
       int len = buffer.readInt();
       byte[] data = new byte[len];
-      buffer.readBytes(data);
-      return new SimpleString(data);
+      buffer.readBytes( data );
+      return new SimpleString( data );
    }
 
    public String readString() {
@@ -94,14 +94,14 @@ public class ChannelBufferWrapper implements ActiveMQBuffer {
    private String readStringInternal() {
       int len = buffer.readInt();
 
-      if (len < 9) {
+      if ( len < 9 ) {
          char[] chars = new char[len];
          for (int i = 0; i < len; i++) {
             chars[i] = (char) buffer.readShort();
          }
-         return new String(chars);
+         return new String( chars );
       }
-      else if (len < 0xfff) {
+      else if ( len < 0xfff ) {
          return readUTF();
       }
       else {
@@ -110,70 +110,70 @@ public class ChannelBufferWrapper implements ActiveMQBuffer {
    }
 
    public String readUTF() {
-      return UTF8Util.readUTF(this);
+      return UTF8Util.readUTF( this );
    }
 
    public void writeBoolean(final boolean val) {
-      buffer.writeByte((byte) (val ? -1 : 0));
+      buffer.writeByte( (byte) (val ? -1 : 0) );
    }
 
    public void writeNullableSimpleString(final SimpleString val) {
-      if (val == null) {
-         buffer.writeByte(DataConstants.NULL);
+      if ( val == null ) {
+         buffer.writeByte( DataConstants.NULL );
       }
       else {
-         buffer.writeByte(DataConstants.NOT_NULL);
-         writeSimpleStringInternal(val);
+         buffer.writeByte( DataConstants.NOT_NULL );
+         writeSimpleStringInternal( val );
       }
    }
 
    public void writeNullableString(final String val) {
-      if (val == null) {
-         buffer.writeByte(DataConstants.NULL);
+      if ( val == null ) {
+         buffer.writeByte( DataConstants.NULL );
       }
       else {
-         buffer.writeByte(DataConstants.NOT_NULL);
-         writeStringInternal(val);
+         buffer.writeByte( DataConstants.NOT_NULL );
+         writeStringInternal( val );
       }
    }
 
    public void writeSimpleString(final SimpleString val) {
-      writeSimpleStringInternal(val);
+      writeSimpleStringInternal( val );
    }
 
    private void writeSimpleStringInternal(final SimpleString val) {
       byte[] data = val.getData();
-      buffer.writeInt(data.length);
-      buffer.writeBytes(data);
+      buffer.writeInt( data.length );
+      buffer.writeBytes( data );
    }
 
    public void writeString(final String val) {
-      writeStringInternal(val);
+      writeStringInternal( val );
    }
 
    private void writeStringInternal(final String val) {
       int length = val.length();
 
-      buffer.writeInt(length);
+      buffer.writeInt( length );
 
-      if (length < 9) {
+      if ( length < 9 ) {
          // If very small it's more performant to store char by char
          for (int i = 0; i < val.length(); i++) {
-            buffer.writeShort((short) val.charAt(i));
+            buffer.writeShort( (short) val.charAt( i ) );
          }
       }
-      else if (length < 0xfff) {
+      else if ( length < 0xfff ) {
          // Store as UTF - this is quicker than char by char for most strings
-         writeUTF(val);
+         writeUTF( val );
       }
       else {
          // Store as SimpleString, since can't store utf > 0xffff in length
-         writeSimpleStringInternal(new SimpleString(val));
+         writeSimpleStringInternal( new SimpleString( val ) );
       }
    }
 
    public void writeUTF(final String utf) {
-      UTF8Util.saveUTF(this, utf);
+      UTF8Util.saveUTF( this, utf );
    }
 
    public int capacity() {
@@ -182,7 +182,7 @@ public class ChannelBufferWrapper implements ActiveMQBuffer {
 
    @Override
    public boolean release() {
-      if(this.buffer!=null){
+      if ( this.buffer != null ) {
          return buffer.release();
       }
       return false;
@@ -190,7 +190,7 @@ public class ChannelBufferWrapper implements ActiveMQBuffer {
 
    @Override
    public void retain() {
-      if(this.buffer!=null){
+      if ( this.buffer != null ) {
          this.buffer.retain();
       }
    }
@@ -204,11 +204,11 @@ public class ChannelBufferWrapper implements ActiveMQBuffer {
    }
 
    public ActiveMQBuffer copy() {
-      return new ChannelBufferWrapper(buffer.copy(), releasable);
+      return new ChannelBufferWrapper( buffer.copy(), releasable );
    }
 
    public ActiveMQBuffer copy(final int index, final int length) {
-      return new ChannelBufferWrapper(buffer.copy(index, length), releasable);
+      return new ChannelBufferWrapper( buffer.copy( index, length ), releasable );
    }
 
    public void discardReadBytes() {
@@ -216,71 +216,71 @@ public class ChannelBufferWrapper implements ActiveMQBuffer {
    }
 
    public ActiveMQBuffer duplicate() {
-      return new ChannelBufferWrapper(buffer.duplicate(), releasable);
+      return new ChannelBufferWrapper( buffer.duplicate(), releasable );
    }
 
    public byte getByte(final int index) {
-      return buffer.getByte(index);
+      return buffer.getByte( index );
    }
 
    public void getBytes(final int index, final byte[] dst, final int dstIndex, final int length) {
-      buffer.getBytes(index, dst, dstIndex, length);
+      buffer.getBytes( index, dst, dstIndex, length );
    }
 
    public void getBytes(final int index, final byte[] dst) {
-      buffer.getBytes(index, dst);
+      buffer.getBytes( index, dst );
    }
 
    public void getBytes(final int index, final ByteBuffer dst) {
-      buffer.getBytes(index, dst);
+      buffer.getBytes( index, dst );
    }
 
    public void getBytes(final int index, final ActiveMQBuffer dst, final int dstIndex, final int length) {
-      buffer.getBytes(index, dst.byteBuf(), dstIndex, length);
+      buffer.getBytes( index, dst.byteBuf(), dstIndex, length );
    }
 
    public void getBytes(final int index, final ActiveMQBuffer dst, final int length) {
-      buffer.getBytes(index, dst.byteBuf(), length);
+      buffer.getBytes( index, dst.byteBuf(), length );
    }
 
    public void getBytes(final int index, final ActiveMQBuffer dst) {
-      buffer.getBytes(index, dst.byteBuf());
+      buffer.getBytes( index, dst.byteBuf() );
    }
 
    public char getChar(final int index) {
-      return (char) buffer.getShort(index);
+      return (char) buffer.getShort( index );
    }
 
    public double getDouble(final int index) {
-      return Double.longBitsToDouble(buffer.getLong(index));
+      return Double.longBitsToDouble( buffer.getLong( index ) );
    }
 
    public float getFloat(final int index) {
-      return Float.intBitsToFloat(buffer.getInt(index));
+      return Float.intBitsToFloat( buffer.getInt( index ) );
    }
 
    public int getInt(final int index) {
-      return buffer.getInt(index);
+      return buffer.getInt( index );
    }
 
    public long getLong(final int index) {
-      return buffer.getLong(index);
+      return buffer.getLong( index );
    }
 
    public short getShort(final int index) {
-      return buffer.getShort(index);
+      return buffer.getShort( index );
    }
 
    public short getUnsignedByte(final int index) {
-      return buffer.getUnsignedByte(index);
+      return buffer.getUnsignedByte( index );
    }
 
    public long getUnsignedInt(final int index) {
-      return buffer.getUnsignedInt(index);
+      return buffer.getUnsignedInt( index );
    }
 
    public int getUnsignedShort(final int index) {
-      return buffer.getUnsignedShort(index);
+      return buffer.getUnsignedShort( index );
    }
 
    public void markReaderIndex() {
@@ -304,31 +304,31 @@ public class ChannelBufferWrapper implements ActiveMQBuffer {
    }
 
    public void readBytes(final byte[] dst, final int dstIndex, final int length) {
-      buffer.readBytes(dst, dstIndex, length);
+      buffer.readBytes( dst, dstIndex, length );
    }
 
    public void readBytes(final byte[] dst) {
-      buffer.readBytes(dst);
+      buffer.readBytes( dst );
    }
 
    public void readBytes(final ByteBuffer dst) {
-      buffer.readBytes(dst);
+      buffer.readBytes( dst );
    }
 
    public void readBytes(final ActiveMQBuffer dst, final int dstIndex, final int length) {
-      buffer.readBytes(dst.byteBuf(), dstIndex, length);
+      buffer.readBytes( dst.byteBuf(), dstIndex, length );
    }
 
    public void readBytes(final ActiveMQBuffer dst, final int length) {
-      buffer.readBytes(dst.byteBuf(), length);
+      buffer.readBytes( dst.byteBuf(), length );
    }
 
    public void readBytes(final ActiveMQBuffer dst) {
-      buffer.readBytes(dst.byteBuf());
+      buffer.readBytes( dst.byteBuf() );
    }
 
    public ActiveMQBuffer readBytes(final int length) {
-      return new ChannelBufferWrapper(buffer.readBytes(length), releasable);
+      return new ChannelBufferWrapper( buffer.readBytes( length ), releasable );
    }
 
    public char readChar() {
@@ -336,7 +336,7 @@ public class ChannelBufferWrapper implements ActiveMQBuffer {
    }
 
    public double readDouble() {
-      return Double.longBitsToDouble(buffer.readLong());
+      return Double.longBitsToDouble( buffer.readLong() );
    }
 
    public int readerIndex() {
@@ -344,11 +344,11 @@ public class ChannelBufferWrapper implements ActiveMQBuffer {
    }
 
    public void readerIndex(final int readerIndex) {
-      buffer.readerIndex(readerIndex);
+      buffer.readerIndex( readerIndex );
    }
 
    public float readFloat() {
-      return Float.intBitsToFloat(buffer.readInt());
+      return Float.intBitsToFloat( buffer.readInt() );
    }
 
    public int readInt() {
@@ -364,7 +364,7 @@ public class ChannelBufferWrapper implements ActiveMQBuffer {
    }
 
    public ActiveMQBuffer readSlice(final int length) {
-      return new ChannelBufferWrapper(buffer.readSlice(length), releasable);
+      return new ChannelBufferWrapper( buffer.readSlice( length ), releasable );
    }
 
    public int readUnsignedByte() {
@@ -388,72 +388,72 @@ public class ChannelBufferWrapper implements ActiveMQBuffer {
    }
 
    public void setByte(final int index, final byte value) {
-      buffer.setByte(index, value);
+      buffer.setByte( index, value );
    }
 
    public void setBytes(final int index, final byte[] src, final int srcIndex, final int length) {
-      buffer.setBytes(index, src, srcIndex, length);
+      buffer.setBytes( index, src, srcIndex, length );
    }
 
    public void setBytes(final int index, final byte[] src) {
-      buffer.setBytes(index, src);
+      buffer.setBytes( index, src );
    }
 
    public void setBytes(final int index, final ByteBuffer src) {
-      buffer.setBytes(index, src);
+      buffer.setBytes( index, src );
    }
 
    public void setBytes(final int index, final ActiveMQBuffer src, final int srcIndex, final int length) {
-      buffer.setBytes(index, src.byteBuf(), srcIndex, length);
+      buffer.setBytes( index, src.byteBuf(), srcIndex, length );
    }
 
    public void setBytes(final int index, final ActiveMQBuffer src, final int length) {
-      buffer.setBytes(index, src.byteBuf(), length);
+      buffer.setBytes( index, src.byteBuf(), length );
    }
 
    public void setBytes(final int index, final ActiveMQBuffer src) {
-      buffer.setBytes(index, src.byteBuf());
+      buffer.setBytes( index, src.byteBuf() );
    }
 
    public void setChar(final int index, final char value) {
-      buffer.setShort(index, (short) value);
+      buffer.setShort( index, (short) value );
    }
 
    public void setDouble(final int index, final double value) {
-      buffer.setLong(index, Double.doubleToLongBits(value));
+      buffer.setLong( index, Double.doubleToLongBits( value ) );
    }
 
    public void setFloat(final int index, final float value) {
-      buffer.setInt(index, Float.floatToIntBits(value));
+      buffer.setInt( index, Float.floatToIntBits( value ) );
    }
 
    public void setIndex(final int readerIndex, final int writerIndex) {
-      buffer.setIndex(readerIndex, writerIndex);
+      buffer.setIndex( readerIndex, writerIndex );
    }
 
    public void setInt(final int index, final int value) {
-      buffer.setInt(index, value);
+      buffer.setInt( index, value );
    }
 
    public void setLong(final int index, final long value) {
-      buffer.setLong(index, value);
+      buffer.setLong( index, value );
    }
 
    public void setShort(final int index, final short value) {
-      buffer.setShort(index, value);
+      buffer.setShort( index, value );
    }
 
    public int skipBytes(final int length) {
-      buffer.skipBytes(length);
+      buffer.skipBytes( length );
       return length;
    }
 
    public ActiveMQBuffer slice() {
-      return new ChannelBufferWrapper(buffer.slice(), releasable);
+      return new ChannelBufferWrapper( buffer.slice(), releasable );
    }
 
    public ActiveMQBuffer slice(final int index, final int length) {
-      return new ChannelBufferWrapper(buffer.slice(index, length), releasable);
+      return new ChannelBufferWrapper( buffer.slice( index, length ), releasable );
    }
 
    public ByteBuffer toByteBuffer() {
@@ -461,7 +461,7 @@ public class ChannelBufferWrapper implements ActiveMQBuffer {
    }
 
    public ByteBuffer toByteBuffer(final int index, final int length) {
-      return buffer.nioBuffer(index, length);
+      return buffer.nioBuffer( index, length );
    }
 
    public boolean writable() {
@@ -473,47 +473,47 @@ public class ChannelBufferWrapper implements ActiveMQBuffer {
    }
 
    public void writeByte(final byte value) {
-      buffer.writeByte(value);
+      buffer.writeByte( value );
    }
 
    public void writeBytes(final byte[] src, final int srcIndex, final int length) {
-      buffer.writeBytes(src, srcIndex, length);
+      buffer.writeBytes( src, srcIndex, length );
    }
 
    public void writeBytes(final byte[] src) {
-      buffer.writeBytes(src);
+      buffer.writeBytes( src );
    }
 
    public void writeBytes(final ByteBuffer src) {
-      buffer.writeBytes(src);
+      buffer.writeBytes( src );
    }
 
    public void writeBytes(final ActiveMQBuffer src, final int srcIndex, final int length) {
-      buffer.writeBytes(src.byteBuf(), srcIndex, length);
+      buffer.writeBytes( src.byteBuf(), srcIndex, length );
    }
 
    public void writeBytes(final ActiveMQBuffer src, final int length) {
-      buffer.writeBytes(src.byteBuf(), length);
+      buffer.writeBytes( src.byteBuf(), length );
    }
 
    public void writeChar(final char chr) {
-      buffer.writeShort((short) chr);
+      buffer.writeShort( (short) chr );
    }
 
    public void writeDouble(final double value) {
-      buffer.writeLong(Double.doubleToLongBits(value));
+      buffer.writeLong( Double.doubleToLongBits( value ) );
    }
 
    public void writeFloat(final float value) {
-      buffer.writeInt(Float.floatToIntBits(value));
+      buffer.writeInt( Float.floatToIntBits( value ) );
    }
 
    public void writeInt(final int value) {
-      buffer.writeInt(value);
+      buffer.writeInt( value );
    }
 
    public void writeLong(final long value) {
-      buffer.writeLong(value);
+      buffer.writeLong( value );
    }
 
    public int writerIndex() {
@@ -521,29 +521,35 @@ public class ChannelBufferWrapper implements ActiveMQBuffer {
    }
 
    public void writerIndex(final int writerIndex) {
-      buffer.writerIndex(writerIndex);
+      buffer.writerIndex( writerIndex );
    }
 
    public void writeShort(final short value) {
-      buffer.writeShort(value);
+      buffer.writeShort( value );
    }
 
-   /** from {@link java.io.DataInput} interface */
+   /**
+    * from {@link java.io.DataInput} interface
+    */
    @Override
    public void readFully(byte[] b) throws IOException {
-      readBytes(b);
+      readBytes( b );
    }
 
-   /** from {@link java.io.DataInput} interface */
+   /**
+    * from {@link java.io.DataInput} interface
+    */
    @Override
    public void readFully(byte[] b, int off, int len) throws IOException {
-      readBytes(b, off, len);
+      readBytes( b, off, len );
    }
 
-   /** from {@link java.io.DataInput} interface */
+   /**
+    * from {@link java.io.DataInput} interface
+    */
    @Override
    public String readLine() throws IOException {
-      return ByteUtil.readLine(this);
+      return ByteUtil.readLine( this );
    }
 
 

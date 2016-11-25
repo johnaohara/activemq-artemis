@@ -18,7 +18,6 @@ package org.apache.activemq.artemis.tests.integration.persistence;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
 import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
-import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.junit.Test;
 
 import java.util.ArrayList;

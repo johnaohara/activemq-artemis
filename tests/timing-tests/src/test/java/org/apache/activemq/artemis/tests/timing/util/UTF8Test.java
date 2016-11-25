@@ -18,7 +18,6 @@ package org.apache.activemq.artemis.tests.timing.util;
 
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
 import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
-import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.junit.After;
 
 import org.junit.Test;

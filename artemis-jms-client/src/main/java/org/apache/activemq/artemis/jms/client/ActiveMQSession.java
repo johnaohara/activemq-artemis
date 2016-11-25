@@ -17,7 +17,10 @@
 package org.apache.activemq.artemis.jms.client;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 import javax.jms.BytesMessage;
 import javax.jms.Destination;
@@ -250,8 +253,8 @@ public class ActiveMQSession implements QueueSession, TopicSession {
             throw JMSExceptionHelper.convertFromActiveMQException(e);
          }
       }
-      if(!createdMessages.isEmpty()){
-         for(ActiveMQMessage message : createdMessages){
+      if ( !createdMessages.isEmpty() ) {
+         for (ActiveMQMessage message : createdMessages) {
             message.getCoreMessage().release();
          }
       }
@@ -668,7 +671,7 @@ public class ActiveMQSession implements QueueSession, TopicSession {
                   throw new RuntimeException("Subscription name cannot be null for durable topic consumer");
                // Non durable sub
 
-               queueName = new SimpleString(UUID.randomUUID().toString());
+               queueName = new SimpleString( UUID.randomUUID().toString());
 
                session.createTemporaryQueue(dest.getSimpleAddress(), queueName, coreFilterString);
 

@@ -24,7 +24,6 @@ import java.util.Set;
 import io.netty.buffer.ByteBuf;
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
 import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
-import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.api.core.ActiveMQException;
 import org.apache.activemq.artemis.api.core.ActiveMQPropertyConversionException;
 import org.apache.activemq.artemis.api.core.Message;
@@ -170,15 +169,15 @@ public abstract class MessageImpl implements MessageInternal {
    }
 
    @Override
-   public boolean release(){
-      if(this.buffer != null){
+   public boolean release() {
+      if (this.buffer != null) {
          return this.buffer.release();
       }
       return false;
    }
    @Override
-   public void retain(){
-      if(this.buffer!=null){
+   public void retain() {
+      if (this.buffer != null) {
          this.buffer.retain();
       }
    }

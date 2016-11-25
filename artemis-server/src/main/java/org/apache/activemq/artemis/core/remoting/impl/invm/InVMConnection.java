@@ -26,7 +26,6 @@ import java.util.concurrent.TimeUnit;
 import io.netty.channel.ChannelFutureListener;
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
 import org.apache.activemq.artemis.api.core.ActiveMQBufferFactory;
-import org.apache.activemq.artemis.api.core.UnpooledActiveMQBuffers;
 import org.apache.activemq.artemis.api.core.ActiveMQInterruptedException;
 import org.apache.activemq.artemis.api.core.TransportConfiguration;
 import org.apache.activemq.artemis.core.security.ActiveMQPrincipal;
@@ -136,7 +135,7 @@ public class InVMConnection implements Connection {
    @Override
    public ActiveMQBuffer createTransportBuffer(final int size, ActiveMQBuffer buffer) {
 //      if(buffer != null && buffer.byteBuf() instanceof ByteBuffer)
-      if(buffer != null ){
+      if ( buffer != null ) {
          return buffer;
       }
       return ActiveMQBufferFactory.dynamicBuffer(size);

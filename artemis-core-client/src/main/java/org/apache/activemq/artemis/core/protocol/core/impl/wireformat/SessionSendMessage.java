@@ -72,7 +72,7 @@ public class SessionSendMessage extends MessagePacket {
          bufferWrite = connection.createTransportBuffer(buffer.writerIndex() + 1, buffer); // 1 for the requireResponse
       }
 
-      if(bufferWrite != buffer ){
+      if (bufferWrite != buffer ) {
          bufferWrite.writeBytes( buffer, 0, buffer.writerIndex() );
          bufferWrite.setIndex( buffer.readerIndex(), buffer.writerIndex() );
 

@@ -16,16 +16,15 @@
  */
 package org.apache.activemq.artemis.api.core;
 
-import java.nio.ByteBuffer;
-
-import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.buffer.Unpooled;
 import org.apache.activemq.artemis.core.buffers.impl.ChannelBufferWrapper;
+
+import java.nio.ByteBuffer;
 
 /**
  * Factory class to create instances of {@link ActiveMQBuffer}.
  */
-public final class UnpooledActiveMQBuffers implements ActiveMQBufferBuilder{
+public final class UnpooledActiveMQBuffers implements ActiveMQBufferBuilder {
 
 
    /**

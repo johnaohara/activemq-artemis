@@ -25,7 +25,7 @@ import java.nio.ByteBuffer;
 /**
  * Factory class to create instances of {@link ActiveMQBuffer}.
  */
-public final class PooledActiveMQBuffers implements ActiveMQBufferBuilder{
+public final class PooledActiveMQBuffers implements ActiveMQBufferBuilder {
 
 
    private static final PooledByteBufAllocator ALLOCATOR = new PooledByteBufAllocator();
@@ -62,6 +62,7 @@ public final class PooledActiveMQBuffers implements ActiveMQBufferBuilder{
     * @return an ActiveMQBuffer wrapping the underlying NIO ByteBuffer
     */
    public ActiveMQBuffer wrappedBuffer(final ByteBuffer underlying) {
+//      throw new InvalidOperationException();
       ActiveMQBuffer buff = new ChannelBufferWrapper(Unpooled.wrappedBuffer(underlying));
 
       buff.clear();
@@ -76,6 +77,7 @@ public final class PooledActiveMQBuffers implements ActiveMQBufferBuilder{
     * @return an ActiveMQBuffer wrapping the underlying byte array
     */
    public ActiveMQBuffer wrappedBuffer(final byte[] underlying) {
+//      throw new InvalidOperationException();
       return new ChannelBufferWrapper(Unpooled.wrappedBuffer(underlying));
    }
 
@@ -86,6 +88,7 @@ public final class PooledActiveMQBuffers implements ActiveMQBufferBuilder{
     * @return a fixed ActiveMQBuffer with the given size
     */
    public ActiveMQBuffer fixedBuffer(final int size) {
+//      throw new InvalidOperationException();
       return new ChannelBufferWrapper(Unpooled.buffer(size, size));
    }
 
