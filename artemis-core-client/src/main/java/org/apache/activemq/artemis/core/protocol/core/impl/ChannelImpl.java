@@ -275,6 +275,8 @@ public final class ChannelImpl implements Channel {
             }
          }
          finally {
+            //need to releease buffer
+            buffer.byteBuf().release();
             lock.unlock();
          }
 

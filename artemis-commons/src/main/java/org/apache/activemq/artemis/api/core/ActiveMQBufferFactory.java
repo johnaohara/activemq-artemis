@@ -30,15 +30,15 @@ public class ActiveMQBufferFactory {
 
    static {
 
-//      activeMQBufferBuilder = new PooledActiveMQBuffers();
+      activeMQBufferBuilder = new PooledActiveMQBuffers();
 //      activeMQBufferBuilder = new UnpooledActiveMQBuffers();
       //define strategy here
-      if ( SystemPropertyUtil.get( "org.apache.activemq.artemis.api.core.UsePooled" ) != null ) {
-         activeMQBufferBuilder = new PooledActiveMQBuffers();
-      }
-      else {
-         activeMQBufferBuilder = new UnpooledActiveMQBuffers();
-      }
+//      if ( SystemPropertyUtil.get( "org.apache.activemq.artemis.api.core.UsePooled" ) != null ) {
+//         activeMQBufferBuilder = new PooledActiveMQBuffers();
+//      }
+//      else {
+//         activeMQBufferBuilder = new UnpooledActiveMQBuffers();
+//      }
    }
 
 
