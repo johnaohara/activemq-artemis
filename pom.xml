@@ -470,6 +470,14 @@
             <version>1.2</version>
             <!-- License: Apache 2.0 -->
          </dependency>
+
+         <!-- data flow tracking wiht phosphor tainting -->
+         <dependency>
+            <groupId>edu.columbia.cs.psl.phosphor</groupId>
+            <artifactId>Phosphor</artifactId>
+            <version>0.0.2-SNAPSHOT</version>
+         </dependency>
+
       </dependencies>
    </dependencyManagement>
 

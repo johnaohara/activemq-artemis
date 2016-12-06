@@ -18,6 +18,9 @@ package org.apache.activemq.artemis.api.core;
 
 import java.nio.ByteBuffer;
 
+import edu.columbia.cs.psl.phosphor.runtime.MultiTainter;
+import edu.columbia.cs.psl.phosphor.runtime.Taint;
+import io.netty.buffer.ByteBuf;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.buffer.Unpooled;
 import org.apache.activemq.artemis.core.buffers.impl.ChannelBufferWrapper;
@@ -36,7 +39,9 @@ public final class ActiveMQBuffers {
     * @return a self-expanding ActiveMQBuffer starting with the given size
     */
    public static ActiveMQBuffer dynamicBuffer(final int size) {
-      return new ChannelBufferWrapper(Unpooled.buffer(size));
+      ByteBuf dynamicByteBuf = Unpooled.buffer(size);
+      MultiTainter.taintedObject(dynamicByteBuf, new Taint("test"));
+      return new ChannelBufferWrapper(dynamicByteBuf);
    }
 
    public static ActiveMQBuffer andyDynamicBuffer(final int size) {
@@ -66,7 +71,10 @@ public final class ActiveMQBuffers {
     * @return an ActiveMQBuffer wrapping the underlying NIO ByteBuffer
     */
    public static ActiveMQBuffer wrappedBuffer(final ByteBuffer underlying) {
-      ActiveMQBuffer buff = new ChannelBufferWrapper(Unpooled.wrappedBuffer(underlying));
+      ByteBuf wrappedBuff = Unpooled.wrappedBuffer(underlying);
+      MultiTainter.taintedObject(wrappedBuff, new Taint("test"));
+
+      ActiveMQBuffer buff = new ChannelBufferWrapper(wrappedBuff);
 
       buff.clear();
 
@@ -80,7 +88,10 @@ public final class ActiveMQBuffers {
     * @return an ActiveMQBuffer wrapping the underlying byte array
     */
    public static ActiveMQBuffer wrappedBuffer(final byte[] underlying) {
-      return new ChannelBufferWrapper(Unpooled.wrappedBuffer(underlying));
+      ByteBuf wrappedBuff = Unpooled.wrappedBuffer(underlying);
+      MultiTainter.taintedObject(wrappedBuff, new Taint("test"));
+
+      return new ChannelBufferWrapper(wrappedBuff);
    }
 
    /**
@@ -90,7 +101,9 @@ public final class ActiveMQBuffers {
     * @return a fixed ActiveMQBuffer with the given size
     */
    public static ActiveMQBuffer fixedBuffer(final int size) {
-      return new ChannelBufferWrapper(Unpooled.buffer(size, size));
+      ByteBuf dynamicByteBuf = Unpooled.buffer(size);
+      MultiTainter.taintedObject(dynamicByteBuf, new Taint("test"));
+      return new ChannelBufferWrapper(dynamicByteBuf);
    }
 
    private ActiveMQBuffers() {

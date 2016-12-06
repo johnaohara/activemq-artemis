@@ -65,6 +65,10 @@
          <artifactId>junit</artifactId>
          <scope>test</scope>
       </dependency>
+      <dependency>
+         <groupId>edu.columbia.cs.psl.phosphor</groupId>
+         <artifactId>Phosphor</artifactId>
+      </dependency>
    </dependencies>
 
 </project>

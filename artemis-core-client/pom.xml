@@ -61,6 +61,10 @@
          <groupId>io.netty</groupId>
          <artifactId>netty-all</artifactId>
       </dependency>
+      <dependency>
+         <groupId>edu.columbia.cs.psl.phosphor</groupId>
+         <artifactId>Phosphor</artifactId>
+      </dependency>
 
       <dependency>
          <groupId>junit</groupId>
