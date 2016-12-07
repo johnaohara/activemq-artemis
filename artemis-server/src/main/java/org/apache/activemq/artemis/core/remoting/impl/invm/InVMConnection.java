@@ -133,7 +133,16 @@ public class InVMConnection implements Connection {
    }
 
    public ActiveMQBuffer createTransportBuffer(final int size) {
-      return ActiveMQBuffers.dynamicBuffer(size);
+      return createTransportBuffer(size, false);
+   }
+
+   public ActiveMQBuffer createTransportBuffer(final int size, boolean pooled) {
+      if(pooled) {
+         return ActiveMQBuffers.pooledBuffer( size );
+      }
+      else {
+         return ActiveMQBuffers.dynamicBuffer( size );
+      }
    }
 
    public Object getID() {
@@ -158,7 +167,6 @@ public class InVMConnection implements Connection {
                      final boolean batch,
                      final ChannelFutureListener futureListener) {
 
-      //final ActiveMQBuffer copied = buffer.copy(0, buffer.capacity());
       final ActiveMQBuffer copied = ActiveMQBuffers.pooledBuffer(buffer.capacity());
       int read = buffer.readerIndex();
       int writ = buffer.writerIndex();
@@ -191,8 +199,8 @@ public class InVMConnection implements Connection {
                   if (isTrace) {
                      ActiveMQServerLogger.LOGGER.trace(InVMConnection.this + "::packet sent done");
                   }
-                  if( copied.isPooled() && copied.byteBuf().refCnt() > 0 ){
-                     copied.byteBuf().release();
+                  if( copied.byteBuf().refCnt() > 0 ){
+                     copied.release();
                   }
                }
             }

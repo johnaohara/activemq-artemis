@@ -239,11 +239,6 @@ public class TestConversions extends Assert {
    class EmptyBuffer implements ActiveMQBuffer {
 
       @Override
-      public boolean isPooled() {
-         return false;
-      }
-
-      @Override
       public ByteBuf byteBuf() {
          return null;
       }
@@ -734,6 +729,11 @@ public class TestConversions extends Assert {
       @Override
       public ByteBuffer toByteBuffer(int index, int length) {
          return null;
+      }
+
+      @Override
+      public void release() {
+         //no-op
       }
    }
 }
