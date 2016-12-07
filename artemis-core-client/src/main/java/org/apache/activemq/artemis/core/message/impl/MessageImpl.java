@@ -410,39 +410,41 @@ public abstract class MessageImpl implements MessageInternal {
       ActiveMQBuffer newBuffer = buffer;
       //newBuffer.byteBuf().retain();
       if(buffer.isPooled()){
-         System.out.println("---------------\n"+ByteBufUtil.prettyHexDump(buffer.byteBuf())+"\n---------------\n");
+//         System.out.println("---------------\n"+ByteBufUtil.prettyHexDump(buffer.byteBuf())+"\n---------------\n");
 //         ByteBuf newNettyBuffer = Unpooled.buffer(buffer.byteBuf().capacity());
+         ByteBuf newNettyBuffer = Unpooled.directBuffer(buffer.byteBuf().capacity());
          int read = buffer.byteBuf().readerIndex();
          int writ = buffer.byteBuf().writerIndex();
 //
          int readArt = buffer.readerIndex();
          int writArt = buffer.writerIndex();
-//         buffer.byteBuf().readerIndex(0);
-//         buffer.byteBuf().readBytes(newNettyBuffer,0,buffer.byteBuf().capacity());
-//         buffer.byteBuf().setIndex(read,writ);
-//         newNettyBuffer.setIndex(read,writ);
-//
-//         newBuffer = new ChannelBufferWrapper(newNettyBuffer);
+         buffer.byteBuf().readerIndex(0);
 
-
-
-         byte[] bytes = new byte[buffer.byteBuf().capacity()];
-         int readerIndex = buffer.byteBuf().readerIndex();
-         buffer.byteBuf().getBytes(0, bytes,0, buffer.capacity());
-
-         ByteBuf newNettyBuffer = Unpooled.wrappedBuffer(bytes);
-
+         buffer.byteBuf().readBytes(newNettyBuffer,0,buffer.byteBuf().writerIndex());
          buffer.byteBuf().setIndex(read,writ);
          newNettyBuffer.setIndex(read,writ);
 
-
          newBuffer = new ChannelBufferWrapper(newNettyBuffer);
+
+
+
+//         byte[] bytes = new byte[buffer.byteBuf().capacity()];
+//         int readerIndex = buffer.byteBuf().readerIndex();
+//         buffer.byteBuf().getBytes(0, bytes,0, buffer.capacity());
+//
+//         ByteBuf newNettyBuffer = Unpooled.wrappedBuffer(bytes);
+
+//         buffer.byteBuf().setIndex(read,writ);
+//         newNettyBuffer.setIndex(read,writ);
+//
+//
+//         newBuffer = new ChannelBufferWrapper(newNettyBuffer);
          buffer.setIndex(readArt,writArt);
          newBuffer.setIndex(readArt,writArt);
 
 
-         System.out.println("---------------\n"+ByteBufUtil.prettyHexDump(newBuffer.byteBuf())+"\n---------------\n");
-         System.out.println("~~~~~~~"+buffer.byteBuf().compareTo(newBuffer.byteBuf())+"~~~~~~~");
+//         System.out.println("---------------\n"+ByteBufUtil.prettyHexDump(newBuffer.byteBuf())+"\n---------------\n");
+//         System.out.println("~~~~~~~"+buffer.byteBuf().compareTo(newBuffer.byteBuf())+"~~~~~~~");
       }
 
       this.buffer = newBuffer;
