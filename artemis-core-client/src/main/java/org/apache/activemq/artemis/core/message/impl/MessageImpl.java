@@ -411,8 +411,8 @@ public abstract class MessageImpl implements MessageInternal {
       //newBuffer.byteBuf().retain();
       if(buffer.isPooled()){
 //         System.out.println("---------------\n"+ByteBufUtil.prettyHexDump(buffer.byteBuf())+"\n---------------\n");
-//         ByteBuf newNettyBuffer = Unpooled.buffer(buffer.byteBuf().capacity());
-         ByteBuf newNettyBuffer = Unpooled.directBuffer(buffer.byteBuf().capacity());
+         ByteBuf newNettyBuffer = Unpooled.buffer(buffer.byteBuf().capacity());
+//         ByteBuf newNettyBuffer = Unpooled.directBuffer(buffer.byteBuf().capacity());
          int read = buffer.byteBuf().readerIndex();
          int writ = buffer.byteBuf().writerIndex();
 //
