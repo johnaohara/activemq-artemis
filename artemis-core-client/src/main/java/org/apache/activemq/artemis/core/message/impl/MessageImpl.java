@@ -453,6 +453,8 @@ public abstract class MessageImpl implements MessageInternal {
 
       decode();
 
+      buffer.setIndex(newBuffer.readerIndex(),newBuffer.writerIndex());
+
       // Setting up the BodyBuffer based on endOfBodyPosition set from decode
       ResetLimitWrappedActiveMQBuffer tmpbodyBuffer = new ResetLimitWrappedActiveMQBuffer(BODY_OFFSET, this.buffer, null);
       tmpbodyBuffer.readerIndex(BODY_OFFSET);
