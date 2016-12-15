@@ -188,6 +188,10 @@ public class NettyConnection implements Connection {
    }
 
    public ActiveMQBuffer createTransportBuffer(final int size) {
+      return createTransportBuffer(size, false);
+   }
+
+   public ActiveMQBuffer createTransportBuffer(final int size, boolean pooled) {
       return new ChannelBufferWrapper(PartialPooledByteBufAllocator.INSTANCE.directBuffer(size), true);
    }
 

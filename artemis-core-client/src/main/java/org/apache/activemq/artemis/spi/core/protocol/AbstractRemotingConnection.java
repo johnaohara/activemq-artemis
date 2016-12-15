@@ -162,6 +162,10 @@ public abstract class AbstractRemotingConnection implements RemotingConnection {
       return transportConnection.createTransportBuffer(size);
    }
 
+   public ActiveMQBuffer createTransportBuffer(final int size, boolean pooled) {
+      return transportConnection.createTransportBuffer(size, pooled);
+   }
+
    public Connection getTransportConnection() {
       return transportConnection;
    }

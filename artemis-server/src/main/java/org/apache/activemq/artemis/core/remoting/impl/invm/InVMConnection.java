@@ -132,8 +132,17 @@ public class InVMConnection implements Connection {
       }
    }
 
-   public ActiveMQBuffer createTransportBuffer(final int size) {
-      return ActiveMQBuffers.dynamicBuffer(size);
+   public ActiveMQBuffer createTransportBuffer(int size) {
+      return createTransportBuffer(size, false);
+   }
+
+   public ActiveMQBuffer createTransportBuffer(final int size, boolean pooled) {
+      if(pooled) {
+         return ActiveMQBuffers.pooledBuffer( size );
+      }
+      else {
+         return ActiveMQBuffers.dynamicBuffer( size );
+      }
    }
 
    public Object getID() {
