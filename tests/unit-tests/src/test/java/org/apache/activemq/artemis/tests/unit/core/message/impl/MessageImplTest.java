@@ -300,7 +300,7 @@ public class MessageImplTest extends ActiveMQTestBase {
                   errors.incrementAndGet();
                }
                finally {
-                  if( buf != null ){
+                  if ( buf != null ) {
                      buf.release();
                   }
                }
