@@ -238,7 +238,6 @@ public class TestConversions extends Assert {
 
    class EmptyBuffer implements ActiveMQBuffer {
 
-
       @Override
       public ByteBuf byteBuf() {
          return null;

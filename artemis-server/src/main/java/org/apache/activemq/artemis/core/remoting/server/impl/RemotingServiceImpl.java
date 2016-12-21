@@ -607,7 +607,7 @@ public class RemotingServiceImpl implements RemotingService, ConnectionLifeCycle
 
    // Inner classes -------------------------------------------------
 
-      private final class DelegatingBufferHandler implements BufferHandler {
+   private final class DelegatingBufferHandler implements BufferHandler {
 
       public void bufferReceived(final Object connectionID, final ActiveMQBuffer buffer) {
          ConnectionEntry conn = connections.get(connectionID);

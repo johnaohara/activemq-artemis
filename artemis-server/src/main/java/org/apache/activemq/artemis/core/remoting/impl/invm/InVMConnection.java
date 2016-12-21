@@ -132,7 +132,7 @@ public class InVMConnection implements Connection {
       }
    }
 
-   public ActiveMQBuffer createTransportBuffer(int size) {
+   public ActiveMQBuffer createTransportBuffer(final int size) {
       return createTransportBuffer(size, false);
    }
 
@@ -167,7 +167,6 @@ public class InVMConnection implements Connection {
                      final boolean batch,
                      final ChannelFutureListener futureListener) {
 
-      //final ActiveMQBuffer copied = buffer.copy(0, buffer.capacity());
       final ActiveMQBuffer copied = ActiveMQBuffers.pooledBuffer(buffer.capacity());
       int read = buffer.readerIndex();
       int writ = buffer.writerIndex();
