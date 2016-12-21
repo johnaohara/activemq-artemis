@@ -22,7 +22,6 @@ import java.util.Map;
 import java.util.Set;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufUtil;
 import io.netty.buffer.Unpooled;
 import org.apache.activemq.artemis.api.core.ActiveMQBuffer;
 import org.apache.activemq.artemis.api.core.ActiveMQBuffers;
@@ -78,9 +77,9 @@ public abstract class MessageImpl implements MessageInternal {
 
    protected byte priority;
 
-   volatile protected ActiveMQBuffer buffer;
+   protected volatile ActiveMQBuffer buffer;
 
-   volatile protected ResetLimitWrappedActiveMQBuffer bodyBuffer;
+   protected volatile ResetLimitWrappedActiveMQBuffer bodyBuffer;
 
    protected volatile boolean bufferValid;
 
@@ -426,7 +425,7 @@ public abstract class MessageImpl implements MessageInternal {
 
    }
 
-   private ActiveMQBuffer copyMessageBuffer(ActiveMQBuffer buffer){
+   private ActiveMQBuffer copyMessageBuffer(ActiveMQBuffer buffer) {
       ActiveMQBuffer copiedBuffer;
 
       ByteBuf newNettyBuffer = Unpooled.buffer( buffer.byteBuf().capacity() );

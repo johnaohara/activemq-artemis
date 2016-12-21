@@ -137,7 +137,7 @@ public class InVMConnection implements Connection {
    }
 
    public ActiveMQBuffer createTransportBuffer(final int size, boolean pooled) {
-      if(pooled) {
+      if ( pooled ) {
          return ActiveMQBuffers.pooledBuffer( size );
       }
       else {
@@ -170,7 +170,7 @@ public class InVMConnection implements Connection {
       final ActiveMQBuffer copied = ActiveMQBuffers.pooledBuffer(buffer.capacity());
       int read = buffer.readerIndex();
       int writ = buffer.writerIndex();
-      copied.writeBytes(buffer,read,writ-read);
+      copied.writeBytes(buffer,read,writ - read);
       copied.setIndex(read,writ);
       buffer.setIndex(read,writ);
 
@@ -199,7 +199,7 @@ public class InVMConnection implements Connection {
                   if (isTrace) {
                      ActiveMQServerLogger.LOGGER.trace(InVMConnection.this + "::packet sent done");
                   }
-                  if( copied.byteBuf().refCnt() > 0 ){
+                  if ( copied.byteBuf().refCnt() > 0 ) {
                      copied.release();
                   }
                }
