@@ -808,9 +808,7 @@ public class ActiveMQSessionContext extends SessionContext {
 
       conn.write(buffer, false, false);
 
-      if(buffer.isPooled()){
-         buffer.byteBuf().release();
-      }
+      buffer.release();
    }
 
 }

@@ -131,9 +131,6 @@ public class LargeMessageControllerImpl implements LargeMessageController {
 
    // Public --------------------------------------------------------
 
-   @Override
-   public boolean isPooled(){return false;}
-
    public void setLocal(boolean local) {
       this.local = local;
    }
@@ -529,6 +526,11 @@ public class LargeMessageControllerImpl implements LargeMessageController {
    @Override
    public ByteBuffer toByteBuffer(final int index, final int length) {
       throw new IllegalAccessError(LargeMessageControllerImpl.READ_ONLY_ERROR_MESSAGE);
+   }
+
+   @Override
+   public void release() {
+      //no-op
    }
 
    public int readerIndex() {

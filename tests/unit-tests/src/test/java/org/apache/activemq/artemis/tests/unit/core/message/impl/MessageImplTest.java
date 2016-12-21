@@ -300,8 +300,8 @@ public class MessageImplTest extends ActiveMQTestBase {
                   errors.incrementAndGet();
                }
                finally {
-                  if(buf != null & buf.isPooled() ){
-                     buf.byteBuf().release();
+                  if( buf != null ){
+                     buf.release();
                   }
                }
             }

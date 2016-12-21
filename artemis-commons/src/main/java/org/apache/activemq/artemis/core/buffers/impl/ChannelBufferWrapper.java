@@ -31,7 +31,6 @@ public class ChannelBufferWrapper implements ActiveMQBuffer {
 
    protected ByteBuf buffer; // NO_UCD (use final)
    private final boolean releasable;
-   private final boolean isPooled;
    public static ByteBuf unwrap(ByteBuf buffer) {
       ByteBuf parent;
       while ((parent = buffer.unwrap()) != null && parent != buffer) // this last part is just in case the semantic
@@ -46,9 +45,6 @@ public class ChannelBufferWrapper implements ActiveMQBuffer {
       this(buffer, false);
    }
    public ChannelBufferWrapper(final ByteBuf buffer, boolean releasable) {
-      this(buffer,releasable,false);
-   }
-   public ChannelBufferWrapper(final ByteBuf buffer, boolean releasable,boolean isPooled) {
       if (!releasable) {
          this.buffer = Unpooled.unreleasableBuffer(buffer);
       }
@@ -56,11 +52,8 @@ public class ChannelBufferWrapper implements ActiveMQBuffer {
          this.buffer = buffer;
       }
       this.releasable = releasable;
-      this.isPooled = isPooled;
    }
 
-
-   public boolean isPooled(){return this.isPooled;}
    public boolean readBoolean() {
       return readByte() != 0;
    }
@@ -452,6 +445,11 @@ public class ChannelBufferWrapper implements ActiveMQBuffer {
 
    public ByteBuffer toByteBuffer(final int index, final int length) {
       return buffer.nioBuffer(index, length);
+   }
+
+   @Override
+   public void release() {
+      buffer.release();
    }
 
    public boolean writable() {

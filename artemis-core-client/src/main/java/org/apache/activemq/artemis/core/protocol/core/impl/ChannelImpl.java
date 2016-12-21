@@ -288,9 +288,8 @@ public final class ChannelImpl implements Channel {
          // buffer is full, preventing any incoming buffers being handled and blocking failover
          connection.getTransportConnection().write(buffer, flush, batch);
 
-         if(buffer.isPooled()){
-            buffer.byteBuf().release();
-         }
+         buffer.release();
+
          return true;
       }
    }
@@ -409,9 +408,7 @@ public final class ChannelImpl implements Channel {
          }
          finally {
             lock.unlock();
-            if(buffer.isPooled()){
-               buffer.byteBuf().release();
-            }
+            buffer.release();
          }
 
          return response;
@@ -639,9 +636,8 @@ public final class ChannelImpl implements Channel {
 
       connection.getTransportConnection().write(buffer, false, false);
 
-      if(buffer.isPooled()){
-         buffer.byteBuf().release();
-      }
+      buffer.release();
+
    }
 
    private void addResendPacket(Packet packet) {

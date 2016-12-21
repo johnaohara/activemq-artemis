@@ -200,8 +200,8 @@ public class InVMConnection implements Connection {
                   if (isTrace) {
                      ActiveMQServerLogger.LOGGER.trace(InVMConnection.this + "::packet sent done");
                   }
-                  if( copied.isPooled() && copied.byteBuf().refCnt() > 0 ){
-                     copied.byteBuf().release();
+                  if( copied.byteBuf().refCnt() > 0 ){
+                     copied.release();
                   }
                }
             }

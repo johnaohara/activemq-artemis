@@ -196,6 +196,11 @@ final class CompressedLargeMessageControllerImpl implements LargeMessageControll
       throw new IllegalAccessError(OPERATION_NOT_SUPPORTED);
    }
 
+   @Override
+   public void release() {
+      //no-op
+   }
+
    public int readerIndex() {
       return 0;
    }
@@ -613,11 +618,6 @@ final class CompressedLargeMessageControllerImpl implements LargeMessageControll
    }
 
    // Inner classes -------------------------------------------------
-
-   @Override
-   public boolean isPooled() {
-      return false;
-   }
 
    public ByteBuf byteBuf() {
       return null;
